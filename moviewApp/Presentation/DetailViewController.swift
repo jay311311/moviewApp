@@ -1,25 +1,23 @@
 //
-//  HomeViewController.swift
+//  DetailViewController.swift
 //  moviewApp
 //
-//  Created by Jooeun Kim on 2022/10/12.
+//  Created by Jooeun Kim on 2022/10/13.
 //
 
 import UIKit
-import SnapKit
 
-class HomeViewController: UIViewController {
+class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-
         setupUI()
     }
     
     let mainTitle:UILabel  = {
         let label  =  UILabel()
-        label.text =  "홈"
+        label.text =  "상세"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -32,7 +30,5 @@ class HomeViewController: UIViewController {
             $0.center.equalTo(self.view)
         }
     }
-
-  
 
 }

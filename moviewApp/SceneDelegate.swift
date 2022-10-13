@@ -6,11 +6,16 @@
 //
 
 import UIKit
+import RxFlow
+import RxSwift
+import RxCocoa
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
+    let disposeBag = DisposeBag()
     var window: UIWindow?
-
+    var coordinator = FlowCoordinator()
+    lazy var appServices = NetworkService(name: "영화")
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -18,9 +23,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window =  UIWindow(windowScene: windowScene)
-        let mainViewController  = TabBarViewController()
-        window?.rootViewController = mainViewController
-        window?.makeKeyAndVisible()
+        
+        self.coordinator.rx.willNavigate.subscribe(onNext: { (flow, step) in
+            print("will navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: self.disposeBag)
+
+        self.coordinator.rx.didNavigate.subscribe(onNext: { (flow, step) in
+            print("did navigate to flow=\(flow) and step=\(step)")
+        }).disposed(by: self.disposeBag)
+
+        let appFlow = MainFlow(withService: self.appServices)
+
+        self.coordinator.coordinate(flow: appFlow, with: MainStepper(withServices: self.appServices))
+
+        Flows.use(appFlow, when: .created) { [self] root in
+            self.window?.rootViewController = root
+            self.window?.makeKeyAndVisible()
+        }
+
+        
+        
+//        let mainViewController  = TabBarViewController()
+//        window?.rootViewController = mainViewController
+//        window?.makeKeyAndVisible()
         
     }
 
