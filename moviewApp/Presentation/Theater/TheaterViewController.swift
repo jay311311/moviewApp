@@ -10,7 +10,7 @@ import SnapKit
 
 class TheaterViewController: UIViewController {
 
-    var viewModel:  TheaterViewModel
+    var viewModel: TheaterViewModel
     
     init(viewModel: TheaterViewModel) {
         self.viewModel = viewModel

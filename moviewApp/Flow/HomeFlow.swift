@@ -16,11 +16,19 @@ class HomeFlow: Flow {
         return self.rootViewController
     }
     
+<<<<<<< HEAD
     private let rootViewController = UINavigationController()
     private let networkService: NetworkService
     private let homeStepper: HomeViewModel
     
     init(withService services: NetworkService, withStepper steppers: HomeViewModel){
+=======
+    private let rootViewController  =  UINavigationController()
+    private let networkService : NetworkService
+    private let homeStepper : HomeViewModel
+    
+    init(withService services : NetworkService, withStepper steppers: HomeViewModel){
+>>>>>>> 6b45815 (push viewController using RxFlow)
         self.networkService = services
         self.homeStepper = steppers
     }
@@ -37,8 +45,14 @@ class HomeFlow: Flow {
         }
     }
     
+<<<<<<< HEAD
     private func navigateToHomeScreen() -> FlowContributors {
         let viewController = HomeViewController(viewModel: homeStepper)
+=======
+    private func navigateToHomeScreen() -> FlowContributors{
+        let viewController  =  HomeViewController(viewModel: homeStepper)
+//        viewController.title = viewController.mainTitle.text
+>>>>>>> 6b45815 (push viewController using RxFlow)
         self.rootViewController.pushViewController(viewController, animated: false)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: homeStepper))
     }

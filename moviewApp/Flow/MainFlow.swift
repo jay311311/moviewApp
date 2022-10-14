@@ -51,8 +51,17 @@ class MainFlow: Flow {
             let searchBtn = UITabBarItem(title: "Search", image: UIImage.init(systemName: "magnifyingglass"), selectedImage: nil)
             let theaterBtn = UITabBarItem(title: "Theater", image: UIImage.init(systemName: "ticket"), selectedImage: nil)
             root1.tabBarItem = homeBtn
+<<<<<<< HEAD
             root2.tabBarItem = searchBtn
             root3.tabBarItem = theaterBtn
+=======
+//            root1.title = "Home"
+            root2.tabBarItem = searchBtn
+//            root2.title = "Search"
+            root3.tabBarItem = theaterBtn
+//            root3.title = "Theater"
+            
+>>>>>>> 6b45815 (push viewController using RxFlow)
             self.rootViewController.setViewControllers([root1, root2, root3], animated: false)
         }
         

@@ -10,6 +10,6 @@ import RxSwift
 import RxCocoa
 
 class TheaterViewModel: Stepper  {
-        let steps = PublishRelay<Step>()
+    let steps = PublishRelay<Step>()
 }
 

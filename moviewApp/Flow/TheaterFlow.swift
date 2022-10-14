@@ -16,10 +16,17 @@ class TheaterFlow: Flow {
     }
     
     private let rooViewController = UINavigationController()
+<<<<<<< HEAD
     private let networkService: NetworkService
     private let theaterStepper: TheaterViewModel
     
     init(withService services: NetworkService, withStepper steppers: TheaterViewModel) {
+=======
+    private let networkService : NetworkService
+    private let theaterStepper : TheaterViewModel
+    
+    init(withService services : NetworkService, withStepper steppers: TheaterViewModel){
+>>>>>>> 6b45815 (push viewController using RxFlow)
         self.networkService = services
         self.theaterStepper =  steppers
     }
@@ -36,7 +43,11 @@ class TheaterFlow: Flow {
     }
     
     func navigateToTheaterScreen() -> FlowContributors {
+<<<<<<< HEAD
         let viewController = TheaterViewController(viewModel: theaterStepper)
+=======
+        let viewController  = TheaterViewController(viewModel: theaterStepper)
+>>>>>>> 6b45815 (push viewController using RxFlow)
         self.rooViewController.pushViewController(viewController, animated: true)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: theaterStepper))
     }

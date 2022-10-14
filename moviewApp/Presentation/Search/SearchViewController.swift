@@ -11,7 +11,7 @@ import SnapKit
 class SearchViewController: UIViewController {
     
     var viewModel: SearchViewModel
-    
+
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
