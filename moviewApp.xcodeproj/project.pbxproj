@@ -10,7 +10,6 @@
 		0F9D5B656C6DAED9E8751C44 /* libPods-moviewApp-moviewAppUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD03F8AC83697686BB1F1EC3 /* libPods-moviewApp-moviewAppUITests.a */; };
 		1DE8B24304AA9AFC9C11BCC2 /* libPods-moviewAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 592D5953F2401F4FEADD0DD6 /* libPods-moviewAppTests.a */; };
 		5DB6993B43ED431EDC9D6A56 /* libPods-moviewApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980B538EF102AE91B6B5F287 /* libPods-moviewApp.a */; settings = {ATTRIBUTES = (Required, ); }; };
-		674BAB0728F6C2DF00D88963 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674BAB0628F6C2DF00D88963 /* TabBarViewController.swift */; };
 		674BAB0928F6C38E00D88963 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674BAB0828F6C38E00D88963 /* HomeViewController.swift */; };
 		674BAB0B28F6C42500D88963 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674BAB0A28F6C42500D88963 /* SearchViewController.swift */; };
 		674BAB0D28F6C43500D88963 /* TheaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674BAB0C28F6C43500D88963 /* TheaterViewController.swift */; };
@@ -57,7 +56,6 @@
 		53A4E6EE722C9E1D9B0B6296 /* Pods-moviewApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviewApp.release.xcconfig"; path = "Target Support Files/Pods-moviewApp/Pods-moviewApp.release.xcconfig"; sourceTree = "<group>"; };
 		592D5953F2401F4FEADD0DD6 /* libPods-moviewAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-moviewAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE29E02FDCE0BD9B63729F5 /* Pods-moviewAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviewAppTests.release.xcconfig"; path = "Target Support Files/Pods-moviewAppTests/Pods-moviewAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		674BAB0628F6C2DF00D88963 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		674BAB0828F6C38E00D88963 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		674BAB0A28F6C42500D88963 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		674BAB0C28F6C43500D88963 /* TheaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TheaterViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 				6758866728F65BBB00AD8D4E /* SceneDelegate.swift */,
 				6758866928F65BBB00AD8D4E /* ViewController.swift */,
 				67E67E9128F8007600DC3FC8 /* MainStep.swift */,
-				674BAB0628F6C2DF00D88963 /* TabBarViewController.swift */,
 				67E67E9528F802E100DC3FC8 /* NetworkService.swift */,
 				67E67E9828F8044100DC3FC8 /* Presentation */,
 				67E67E9728F8042800DC3FC8 /* Flow */,
@@ -457,7 +454,6 @@
 				674BAB0928F6C38E00D88963 /* HomeViewController.swift in Sources */,
 				67E67E9E28F806A500DC3FC8 /* SearchFlow.swift in Sources */,
 				67E67E9228F8007600DC3FC8 /* MainStep.swift in Sources */,
-				674BAB0728F6C2DF00D88963 /* TabBarViewController.swift in Sources */,
 				6758866A28F65BBB00AD8D4E /* ViewController.swift in Sources */,
 				67E67E9428F800E800DC3FC8 /* MainFlow.swift in Sources */,
 				674BAB0D28F6C43500D88963 /* TheaterViewController.swift in Sources */,

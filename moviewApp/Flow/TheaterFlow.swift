@@ -17,9 +17,9 @@ class TheaterFlow : Flow {
     
     private let rooViewController = UINavigationController()
     private let networkService : NetworkService
-    private let theaterStepper : TheaterStepper
+    private let theaterStepper : TheaterViewModel
     
-    init(withService services : NetworkService, withStepper steppers: TheaterStepper){
+    init(withService services : NetworkService, withStepper steppers: TheaterViewModel){
         self.networkService = services
         self.theaterStepper =  steppers
     }
@@ -28,21 +28,18 @@ class TheaterFlow : Flow {
         
         switch step {
         case .theater:
-            let viewController  = TheaterViewController()
-            return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: TheaterStepper()))
-            
+            return navigateToTheaterScreen()
         default:
             return    .none
         }
         
     }
     
-    
-}
-class TheaterStepper : Stepper {
-    let steps = PublishRelay<Step>()
-    
-    let initialStep: Step =  MainStep.theater
+    func navigateToTheaterScreen() -> FlowContributors {
+        let viewController  = TheaterViewController(viewModel: theaterStepper)
+        self.rooViewController.pushViewController(viewController, animated: true)
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: theaterStepper))
+    }
     
     
 }

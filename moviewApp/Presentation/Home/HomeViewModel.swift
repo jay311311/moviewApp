@@ -10,6 +10,6 @@ import RxFlow
 import RxSwift
 import RxCocoa
 
-class HomeViewModel  {
-    
+class HomeViewModel:Stepper  {
+    let steps = PublishRelay<Step>()
 }

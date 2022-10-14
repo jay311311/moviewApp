@@ -20,9 +20,9 @@ class HomeFlow : Flow {
     
     private let rootViewController  =  UINavigationController()
     private let networkService : NetworkService
-    private let homeStepper : HomeStepper
+    private let homeStepper : HomeViewModel
     
-    init(withService services : NetworkService, withStepper steppers: HomeStepper){
+    init(withService services : NetworkService, withStepper steppers: HomeViewModel){
         self.networkService = services
         self.homeStepper =  steppers
     }
@@ -42,15 +42,10 @@ class HomeFlow : Flow {
     }
     
     private func navigateToHomeScreen() -> FlowContributors{
-        let viewController  =  HomeViewController()
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: HomeStepper()))
+        let viewController  =  HomeViewController(viewModel: homeStepper)
+//        viewController.title = viewController.mainTitle.text
+        self.rootViewController.pushViewController(viewController, animated: false)
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: homeStepper))
     }
 }
 
-class HomeStepper : Stepper {
-    let steps = PublishRelay<Step>()
-
-    let initialStep: Step =  MainStep.home
-    
-    
-}

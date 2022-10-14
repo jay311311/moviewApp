@@ -18,9 +18,9 @@ class SearchFlow :Flow {
     
     private let rootViewController  =  UINavigationController()
     private let networkService : NetworkService
-    private let searchStepper : SearchStepper
+    private let searchStepper : SearchViewModel
     
-    init(withService services : NetworkService, withStepper steppers: SearchStepper){
+    init(withService services : NetworkService, withStepper steppers: SearchViewModel){
         self.networkService = services
         self.searchStepper =  steppers
     }
@@ -29,7 +29,6 @@ class SearchFlow :Flow {
         guard let step  = step as? MainStep  else { return .none }
         
         switch step{
-            
         case .search:
             return  navigateToSearchScreen()
 
@@ -38,15 +37,9 @@ class SearchFlow :Flow {
         }
     }
     
-    private func navigateToSearchScreen() -> FlowContributors{
-        let viewController  =  SearchViewController()
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: SearchStepper()))
+    private func navigateToSearchScreen() -> FlowContributors {
+        let viewController  =  SearchViewController(viewModel: searchStepper)
+        self.rootViewController.pushViewController(viewController, animated: true)
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: searchStepper))
     }
-}
-class SearchStepper : Stepper {
-    let steps = PublishRelay<Step>()
-
-    let initialStep: Step =  MainStep.search
-    
-    
 }

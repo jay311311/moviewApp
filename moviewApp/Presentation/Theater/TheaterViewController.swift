@@ -10,7 +10,17 @@ import SnapKit
 
 class TheaterViewController: UIViewController {
 
-    var viewModel  =  TheaterViewModel()
+    var viewModel :  TheaterViewModel
+    
+    init(viewModel: TheaterViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
