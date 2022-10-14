@@ -13,7 +13,6 @@ enum MainStep: Step{
     case loginStatus
     case logoutStatus
     
-    
     case home
     case search
     case theater
