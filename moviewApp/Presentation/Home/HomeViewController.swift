@@ -24,19 +24,17 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-
         setupUI()
     }
     
-    let mainTitle:UILabel  = {
-        let label  =  UILabel()
-        label.text =  "홈"
+    let mainTitle: UILabel = {
+        let label = UILabel()
+        label.text = "홈"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    
-    func setupUI(){
+    func setupUI() {
         self.view.addSubview(mainTitle)
         
         mainTitle.snp.makeConstraints{

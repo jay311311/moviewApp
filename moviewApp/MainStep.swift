@@ -8,7 +8,7 @@
 import Foundation
 import RxFlow
 
-enum MainStep : Step{
+enum MainStep: Step{
     
     case loginStatus
     case logoutStatus

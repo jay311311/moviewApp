@@ -10,7 +10,7 @@ import SnapKit
 
 class SearchViewController: UIViewController {
     
-    var viewModel:  SearchViewModel
+    var viewModel: SearchViewModel
     
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
@@ -26,14 +26,14 @@ class SearchViewController: UIViewController {
         self.view.backgroundColor = .white
         setupUI()
     }
-    let mainTitle:UILabel  = {
-        let label  =  UILabel()
-        label.text =  "검색"
+    let mainTitle: UILabel = {
+        let label = UILabel()
+        label.text = "검색"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    func setupUI(){
+    func setupUI() {
         self.view.addSubview(mainTitle)
         
         mainTitle.snp.makeConstraints{

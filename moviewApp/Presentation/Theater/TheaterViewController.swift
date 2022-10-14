@@ -10,7 +10,7 @@ import SnapKit
 
 class TheaterViewController: UIViewController {
 
-    var viewModel :  TheaterViewModel
+    var viewModel:  TheaterViewModel
     
     init(viewModel: TheaterViewModel) {
         self.viewModel = viewModel
@@ -29,9 +29,9 @@ class TheaterViewController: UIViewController {
     }
     
     
-    let mainTitle:UILabel  = {
-        let label  =  UILabel()
-        label.text =  "영화관"
+    let mainTitle: UILabel = {
+        let label = UILabel()
+        label.text = "영화관"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

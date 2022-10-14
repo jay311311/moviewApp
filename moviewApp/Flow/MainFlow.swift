@@ -10,15 +10,14 @@ import UIKit
 import RxFlow
 import RxCocoa
 
-class MainFlow : Flow {
+class MainFlow: Flow {
     var root: Presentable {
         return self.rootViewController
     }
-    
     private let rootViewController = UITabBarController()
-    private let networkService : NetworkService
+    private let networkService: NetworkService
     
-    init(withService  services: NetworkService ){
+    init(withService services: NetworkService) {
         self.networkService = services
     }
     
@@ -28,14 +27,12 @@ class MainFlow : Flow {
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? MainStep else { return .none }
-        
         switch step {
-            
         case .loginStatus:
             return navigateToLoginScreen()
         case .logoutStatus:
             return navigateToLogoutScreen()
-        default :
+        default:
             return .none
         }
     }
@@ -49,18 +46,13 @@ class MainFlow : Flow {
         let searchFlow = SearchFlow(withService: self.networkService, withStepper: searchStepper)
         let theaterFlow = TheaterFlow(withService: self.networkService, withStepper: theatherStepper)
         
-        
         Flows.use(homeFlow, searchFlow, theaterFlow, when: .created) { [unowned self] (root1: UINavigationController, root2: UINavigationController, root3: UINavigationController) in
             let homeBtn = UITabBarItem(title: "Home", image: UIImage.init(systemName: "house"), selectedImage: nil)
             let searchBtn = UITabBarItem(title: "Search", image: UIImage.init(systemName: "magnifyingglass"), selectedImage: nil)
             let theaterBtn = UITabBarItem(title: "Theater", image: UIImage.init(systemName: "ticket"), selectedImage: nil)
             root1.tabBarItem = homeBtn
-//            root1.title = "Home"
             root2.tabBarItem = searchBtn
-//            root2.title = "Search"
             root3.tabBarItem = theaterBtn
-//            root3.title = "Theater"
-            
             self.rootViewController.setViewControllers([root1, root2, root3], animated: false)
         }
         
@@ -70,19 +62,16 @@ class MainFlow : Flow {
                                                         withNextStepper: OneStepper(withSingleStep: MainStep.search)),
                                             .contribute(withNextPresentable: theaterFlow,
                                                         withNextStepper: OneStepper(withSingleStep: MainStep.theater))
-        ]
-        )
+        ])
     }
     
     private func navigateToLogoutScreen() -> FlowContributors {
         return .none
     }
-
 }
 
 
 class MainStepper: Stepper {
-    
     let steps = PublishRelay<Step>()
     private let networkServices: NetworkService
     
@@ -93,5 +82,4 @@ class MainStepper: Stepper {
     var initialStep: Step {
         return MainStep.loginStatus
     }
-    
 }

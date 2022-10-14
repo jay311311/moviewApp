@@ -9,7 +9,7 @@ import RxFlow
 import RxSwift
 import RxCocoa
 
-class TheaterViewModel:Stepper  {
+class TheaterViewModel: Stepper  {
         let steps = PublishRelay<Step>()
 }
 

@@ -9,7 +9,7 @@ import RxFlow
 import RxSwift
 import RxCocoa
 
-class SearchViewModel:Stepper  {
+class SearchViewModel: Stepper  {
     let steps = PublishRelay<Step>()
     
 }

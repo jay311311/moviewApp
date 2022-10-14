@@ -15,20 +15,18 @@ class DetailViewController: UIViewController {
         setupUI()
     }
     
-    let mainTitle:UILabel  = {
-        let label  =  UILabel()
-        label.text =  "상세"
+    let mainTitle: UILabel = {
+        let label = UILabel()
+        label.text = "상세"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
-    
-    func setupUI(){
+    func setupUI() {
         self.view.addSubview(mainTitle)
         
         mainTitle.snp.makeConstraints{
             $0.center.equalTo(self.view)
         }
     }
-
 }
