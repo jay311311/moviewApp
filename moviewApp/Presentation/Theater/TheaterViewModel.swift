@@ -1,5 +1,5 @@
 //
-//  TheaterViewModel.swift
+//  CategoryViewModel.swift
 //  moviewApp
 //
 //  Created by Jooeun Kim on 2022/10/13.
@@ -9,7 +9,7 @@ import RxFlow
 import RxSwift
 import RxCocoa
 
-class TheaterViewModel: Stepper  {
+class CategoryViewModel: Stepper  {
     let steps = PublishRelay<Step>()
 }
 

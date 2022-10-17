@@ -6,8 +6,44 @@
 //
 
 import Foundation
+import Moya
 
-
-struct NetworkService {
-    var name : String
+enum NetworkService {
+    case trendAll
+    case trendMovie
+    case trendTV
+    case search(word:String)
 }
+
+extension NetworkService: TargetType {
+    var baseURL: URL {
+        return URL(string: "https://api.themoviedb.org/3")!
+    }
+    
+    var path: String {
+        switch self {
+        case .trendAll:
+            return "trending/all/week/"
+        case .trendMovie:
+            return "movie/top_rated/"
+        case .trendTV:
+            return "tv/top_rated/"
+        case .search(let word):
+            return "search/multi/query=\(word)"
+        }
+    }
+    
+    var method: Moya.Method {
+        return .get
+    }
+    
+    var task: Moya.Task {
+        return .requestPlain
+    }
+    
+    var headers: [String : String]? {
+        return ["Content-type": "application/json"]
+    }
+}
+
+

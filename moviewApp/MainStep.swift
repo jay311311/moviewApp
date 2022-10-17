@@ -15,7 +15,7 @@ enum MainStep: Step{
     
     case home
     case search
-    case theater
+    case category
     case detail
 }
 

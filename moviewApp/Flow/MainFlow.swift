@@ -15,9 +15,9 @@ class MainFlow: Flow {
         return self.rootViewController
     }
     private let rootViewController = UITabBarController()
-    private let networkService: NetworkService
+    private let networkService: NetworkManager
     
-    init(withService services: NetworkService) {
+    init(withService services: NetworkManager) {
         self.networkService = services
     }
     
@@ -40,28 +40,19 @@ class MainFlow: Flow {
     private func navigateToLoginScreen() -> FlowContributors {
         let homeStepper = HomeViewModel()
         let searchStepper = SearchViewModel()
-        let theatherStepper = TheaterViewModel()
+        let categoryStepper = CategoryViewModel()
         
         let homeFlow = HomeFlow(withService: self.networkService, withStepper: homeStepper)
         let searchFlow = SearchFlow(withService: self.networkService, withStepper: searchStepper)
-        let theaterFlow = TheaterFlow(withService: self.networkService, withStepper: theatherStepper)
+        let categoryFlow = CategoryFlow(withService: self.networkService, withStepper: categoryStepper)
         
-        Flows.use(homeFlow, searchFlow, theaterFlow, when: .created) { [unowned self] (root1: UINavigationController, root2: UINavigationController, root3: UINavigationController) in
+        Flows.use(homeFlow, searchFlow, categoryFlow, when: .created) { [unowned self] (root1: UINavigationController, root2: UINavigationController, root3: UINavigationController) in
             let homeBtn = UITabBarItem(title: "Home", image: UIImage.init(systemName: "house"), selectedImage: nil)
             let searchBtn = UITabBarItem(title: "Search", image: UIImage.init(systemName: "magnifyingglass"), selectedImage: nil)
-            let theaterBtn = UITabBarItem(title: "Theater", image: UIImage.init(systemName: "ticket"), selectedImage: nil)
+            let categoryBtn = UITabBarItem(title: "Category", image: UIImage.init(systemName: "line.horizontal.3"), selectedImage: nil)
             root1.tabBarItem = homeBtn
-<<<<<<< HEAD
             root2.tabBarItem = searchBtn
-            root3.tabBarItem = theaterBtn
-=======
-//            root1.title = "Home"
-            root2.tabBarItem = searchBtn
-//            root2.title = "Search"
-            root3.tabBarItem = theaterBtn
-//            root3.title = "Theater"
-            
->>>>>>> 6b45815 (push viewController using RxFlow)
+            root3.tabBarItem = categoryBtn
             self.rootViewController.setViewControllers([root1, root2, root3], animated: false)
         }
         
@@ -69,8 +60,8 @@ class MainFlow: Flow {
                                                         withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.home), homeStepper])),
                                             .contribute(withNextPresentable: searchFlow,
                                                         withNextStepper: OneStepper(withSingleStep: MainStep.search)),
-                                            .contribute(withNextPresentable: theaterFlow,
-                                                        withNextStepper: OneStepper(withSingleStep: MainStep.theater))
+                                            .contribute(withNextPresentable: categoryFlow ,
+                                                        withNextStepper: OneStepper(withSingleStep: MainStep.category))
         ])
     }
     

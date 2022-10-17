@@ -1,5 +1,5 @@
 //
-//  TheaterViewController.swift
+//  CategoryViewController.swift
 //  moviewApp
 //
 //  Created by Jooeun Kim on 2022/10/12.
@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class TheaterViewController: UIViewController {
+class CategoryViewController: UIViewController {
 
-    var viewModel: TheaterViewModel
+    var viewModel: CategoryViewModel
     
-    init(viewModel: TheaterViewModel) {
+    init(viewModel: CategoryViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -31,8 +31,7 @@ class TheaterViewController: UIViewController {
     
     let mainTitle: UILabel = {
         let label = UILabel()
-        label.text = "영화관"
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "카테고리"
         return label
     }()
 

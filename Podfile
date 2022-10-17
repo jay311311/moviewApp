@@ -4,11 +4,12 @@
 target 'moviewApp' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_modular_headers!
-pod 'RxSwift', '6.5.0'
+    pod 'RxSwift', '6.5.0'
     pod 'RxCocoa', '6.5.0'
-
-pod 'RxFlow'
-   pod 'SnapKit', '~> 5.6.0'
+    pod 'RxFlow'
+    pod 'SnapKit', '~> 5.6.0'
+    pod 'Moya/RxSwift', '~> 15.0'
+    pod 'ReactorKit'
 
   # Pods for moviewApp
 

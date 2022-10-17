@@ -18,7 +18,6 @@ class DetailViewController: UIViewController {
     let mainTitle: UILabel = {
         let label = UILabel()
         label.text = "상세"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 

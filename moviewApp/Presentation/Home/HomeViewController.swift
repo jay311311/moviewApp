@@ -30,7 +30,6 @@ class HomeViewController: UIViewController {
     let mainTitle: UILabel = {
         let label = UILabel()
         label.text = "홈"
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
 
