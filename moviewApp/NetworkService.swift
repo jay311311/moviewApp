@@ -16,6 +16,7 @@ enum NetworkService {
 }
 
 extension NetworkService: TargetType {
+    
     var baseURL: URL {
         return URL(string: "https://api.themoviedb.org/3")!
     }
@@ -23,7 +24,7 @@ extension NetworkService: TargetType {
     var path: String {
         switch self {
         case .trendAll:
-            return "trending/all/week/"
+            return "trending/all/week?api_key=c6a1c7e2e9eda9d872a83caff2d3ca91"
         case .trendMovie:
             return "movie/top_rated/"
         case .trendTV:

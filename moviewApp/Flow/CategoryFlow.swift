@@ -16,11 +16,11 @@ class CategoryFlow: Flow {
     }
     
     private let rooViewController = UINavigationController()
-    private let networkService: NetworkService
+//    private let networkService: NetworkService
     private let categoryStepper: CategoryViewModel
     
-    init(withService services: NetworkService, withStepper steppers: CategoryViewModel) {
-        self.networkService = services
+    init(withStepper steppers: CategoryViewModel) {
+//        self.networkService = services
         self.categoryStepper =  steppers
     }
     func navigate(to step: Step) -> FlowContributors {

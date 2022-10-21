@@ -17,11 +17,10 @@ class HomeFlow: Flow {
     }
     
     private let rootViewController = UINavigationController()
-    private let networkService: NetworkService
+//    private let networkService: NetworkService
     private let homeStepper: HomeViewModel
     
-    init(withService services: NetworkService, withStepper steppers: HomeViewModel){
-        self.networkService = services
+    init(withStepper steppers: HomeViewModel){
         self.homeStepper = steppers
     }
     

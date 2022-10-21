@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let disposeBag = DisposeBag()
     var window: UIWindow?
     var coordinator = FlowCoordinator()
-    lazy var appServices = NetworkManager()
+//    lazy var appServices = NetworkManager()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -32,9 +32,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print("did navigate to flow=\(flow) and step=\(step)")
         }).disposed(by: self.disposeBag)
 
-        let appFlow = MainFlow(withService: self.appServices)
+        let appFlow = MainFlow()
 
-        self.coordinator.coordinate(flow: appFlow, with: MainStepper(withServices: self.appServices))
+        self.coordinator.coordinate(flow: appFlow, with: MainStepper())
 
         Flows.use(appFlow, when: .created) { [self] root in
             self.window?.rootViewController = root

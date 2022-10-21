@@ -13,14 +13,15 @@ struct TrendAll: Codable {
 }
 
 struct AllInfo: Codable {
+    var adult: Bool
     var backdrop_path: String
     var id: Int
-    var name: String
+    var title: String
     var overview: String
     var poster_path: String
+    var media_type : String
     var genre_ids: [Int]
-    var media_type: String
+    var release_date: String
     var vote_average: Double
-    var origin_country: [String]
 }
                

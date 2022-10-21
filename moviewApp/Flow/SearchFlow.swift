@@ -17,12 +17,11 @@ class SearchFlow: Flow {
     }
     
     private let rootViewController = UINavigationController()
-    private let networkService: NetworkService
+//    private let networkService: NetworkService
     private let searchStepper: SearchViewModel
     
-    init(withService services: NetworkService, withStepper steppers: SearchViewModel){
-
-        self.networkService = services
+    init( withStepper steppers: SearchViewModel){
+//        self.networkService = services
         self.searchStepper =  steppers
     }
     

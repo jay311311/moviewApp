@@ -10,6 +10,8 @@
 		0F9D5B656C6DAED9E8751C44 /* libPods-moviewApp-moviewAppUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CD03F8AC83697686BB1F1EC3 /* libPods-moviewApp-moviewAppUITests.a */; };
 		1DE8B24304AA9AFC9C11BCC2 /* libPods-moviewAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 592D5953F2401F4FEADD0DD6 /* libPods-moviewAppTests.a */; };
 		5DB6993B43ED431EDC9D6A56 /* libPods-moviewApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980B538EF102AE91B6B5F287 /* libPods-moviewApp.a */; settings = {ATTRIBUTES = (Required, ); }; };
+		67318C0929026DE7001E4746 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67318C0829026DE6001E4746 /* NetworkManager.swift */; };
+		67318C0B29027909001E4746 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67318C0A29027909001E4746 /* Storage.swift */; };
 		6747AC7028FD36A100BCA44A /* TrendAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6747AC6F28FD36A100BCA44A /* TrendAll.swift */; };
 		674BAB0928F6C38E00D88963 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674BAB0828F6C38E00D88963 /* HomeViewController.swift */; };
 		674BAB0B28F6C42500D88963 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674BAB0A28F6C42500D88963 /* SearchViewController.swift */; };
@@ -57,6 +59,8 @@
 		53A4E6EE722C9E1D9B0B6296 /* Pods-moviewApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviewApp.release.xcconfig"; path = "Target Support Files/Pods-moviewApp/Pods-moviewApp.release.xcconfig"; sourceTree = "<group>"; };
 		592D5953F2401F4FEADD0DD6 /* libPods-moviewAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-moviewAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AE29E02FDCE0BD9B63729F5 /* Pods-moviewAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviewAppTests.release.xcconfig"; path = "Target Support Files/Pods-moviewAppTests/Pods-moviewAppTests.release.xcconfig"; sourceTree = "<group>"; };
+		67318C0829026DE6001E4746 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		67318C0A29027909001E4746 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		6747AC6F28FD36A100BCA44A /* TrendAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendAll.swift; sourceTree = "<group>"; };
 		674BAB0828F6C38E00D88963 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		674BAB0A28F6C42500D88963 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -165,10 +169,12 @@
 				6758866928F65BBB00AD8D4E /* ViewController.swift */,
 				67E67E9128F8007600DC3FC8 /* MainStep.swift */,
 				67E67E9528F802E100DC3FC8 /* NetworkService.swift */,
+				67318C0829026DE6001E4746 /* NetworkManager.swift */,
 				6747AC6E28FD35AD00BCA44A /* Model */,
 				67E67E9828F8044100DC3FC8 /* Presentation */,
 				67E67E9728F8042800DC3FC8 /* Flow */,
 				6758866E28F65BBC00AD8D4E /* Assets.xcassets */,
+				67318C0A29027909001E4746 /* Storage.swift */,
 				6758867028F65BBC00AD8D4E /* LaunchScreen.storyboard */,
 				6758867328F65BBC00AD8D4E /* Info.plist */,
 			);
@@ -456,8 +462,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67318C0929026DE7001E4746 /* NetworkManager.swift in Sources */,
 				67E67E9A28F804D400DC3FC8 /* DetailViewController.swift in Sources */,
 				67E67E9628F802E100DC3FC8 /* NetworkService.swift in Sources */,
+				67318C0B29027909001E4746 /* Storage.swift in Sources */,
 				67E67EA628F8143F00DC3FC8 /* SearchViewModel.swift in Sources */,
 				674BAB0B28F6C42500D88963 /* SearchViewController.swift in Sources */,
 				67E67EA928F8147900DC3FC8 /* TheaterViewModel.swift in Sources */,

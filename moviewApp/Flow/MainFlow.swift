@@ -15,11 +15,9 @@ class MainFlow: Flow {
         return self.rootViewController
     }
     private let rootViewController = UITabBarController()
-    private let networkService: NetworkManager
+//    private let networkService: NetworkManager
     
-    init(withService services: NetworkManager) {
-        self.networkService = services
-    }
+    init() {}
     
     deinit {
         print("이것 전역에 있을꺼여서 절때 deinit될수 없도다")
@@ -42,9 +40,9 @@ class MainFlow: Flow {
         let searchStepper = SearchViewModel()
         let categoryStepper = CategoryViewModel()
         
-        let homeFlow = HomeFlow(withService: self.networkService, withStepper: homeStepper)
-        let searchFlow = SearchFlow(withService: self.networkService, withStepper: searchStepper)
-        let categoryFlow = CategoryFlow(withService: self.networkService, withStepper: categoryStepper)
+        let homeFlow = HomeFlow(withStepper: homeStepper)
+        let searchFlow = SearchFlow(withStepper: searchStepper)
+        let categoryFlow = CategoryFlow(withStepper: categoryStepper)
         
         Flows.use(homeFlow, searchFlow, categoryFlow, when: .created) { [unowned self] (root1: UINavigationController, root2: UINavigationController, root3: UINavigationController) in
             let homeBtn = UITabBarItem(title: "Home", image: UIImage.init(systemName: "house"), selectedImage: nil)
@@ -73,11 +71,9 @@ class MainFlow: Flow {
 
 class MainStepper: Stepper {
     let steps = PublishRelay<Step>()
-    private let networkServices: NetworkService
+//    private let networkServices: NetworkService
     
-    init(withServices services: NetworkService) {
-        self.networkServices = services
-    }
+    init() {}
     
     var initialStep: Step {
         return MainStep.loginStatus
