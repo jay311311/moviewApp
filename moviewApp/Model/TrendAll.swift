@@ -8,20 +8,21 @@
 import Foundation
 
 struct TrendAll: Codable {
-    var page: Int
-    var results: [AllInfo]
+    let results: [AllInfo]
+    let page: Int
+
 }
 
 struct AllInfo: Codable {
-    var adult: Bool
-    var backdrop_path: String
-    var id: Int
-    var title: String
-    var overview: String
-    var poster_path: String
-    var media_type : String
-    var genre_ids: [Int]
-    var release_date: String
-    var vote_average: Double
+    let adult: Bool
+    let backdrop_path: String
+    let id: Int
+    let title: String?
+    let overview: String
+    let poster_path: String
+    let media_type : String
+    let genre_ids: [Int]
+    let release_date: String
+    let vote_average: Double
 }
                

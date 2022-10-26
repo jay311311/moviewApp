@@ -16,7 +16,7 @@ enum NetworkService {
 }
 
 extension NetworkService: TargetType {
-    
+//    let apiKey = "?api_key=c6a1c7e2e9eda9d872a83caff2d3ca91"
     var baseURL: URL {
         return URL(string: "https://api.themoviedb.org/3")!
     }
@@ -24,7 +24,7 @@ extension NetworkService: TargetType {
     var path: String {
         switch self {
         case .trendAll:
-            return "trending/all/week?api_key=c6a1c7e2e9eda9d872a83caff2d3ca91"
+            return "trending/all/week/"
         case .trendMovie:
             return "movie/top_rated/"
         case .trendTV:
@@ -43,7 +43,11 @@ extension NetworkService: TargetType {
     }
     
     var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        return ["Content-type": "application/json","authorization" : "c6a1c7e2e9eda9d872a83caff2d3ca91"]
+    }
+    
+    var validationType: ValidationType {
+        return .successCodes
     }
 }
 

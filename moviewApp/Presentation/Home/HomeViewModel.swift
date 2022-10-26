@@ -27,6 +27,6 @@ class HomeViewModel: Stepper {
 //    }
     
     init(){
-        network.getData()
+        network.loadData()
     }
 }
