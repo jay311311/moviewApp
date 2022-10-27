@@ -9,8 +9,12 @@ import UIKit
 import SnapKit
 
 class HomeViewController: UIViewController {
-
     var viewModel: HomeViewModel
+    lazy var homeMainSlideView: HomeMainSlideViewController = {
+    let mainSlideView = HomeMainSlideViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+        return mainSlideView
+    }()
+
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -24,7 +28,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setupUI()
+        setupLayout()
     }
     
     let mainTitle: UILabel = {
@@ -33,11 +37,17 @@ class HomeViewController: UIViewController {
         return label
     }()
 
-    func setupUI() {
-        self.view.addSubview(mainTitle)
+    func setupLayout() {
+        addChild(homeMainSlideView)
+        view.addSubview(homeMainSlideView.view)
+        view.addSubview(mainTitle)
         
         mainTitle.snp.makeConstraints{
             $0.center.equalTo(self.view)
+        }
+        homeMainSlideView.view.snp.makeConstraints {
+            $0.top.directionalHorizontalEdges.equalToSuperview()
+            $0.height.equalTo(150)
         }
     }
     

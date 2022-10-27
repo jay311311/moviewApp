@@ -16,15 +16,14 @@ enum NetworkService {
 }
 
 extension NetworkService: TargetType {
-//    let apiKey = "?api_key=c6a1c7e2e9eda9d872a83caff2d3ca91"
     var baseURL: URL {
-        return URL(string: "https://api.themoviedb.org/3")!
+        return URL(string: "https://api.themoviedb.org/3/")!
     }
     
     var path: String {
         switch self {
         case .trendAll:
-            return "trending/all/week/"
+            return "trending/movie/week"
         case .trendMovie:
             return "movie/top_rated/"
         case .trendTV:
@@ -39,16 +38,21 @@ extension NetworkService: TargetType {
     }
     
     var task: Moya.Task {
-        return .requestPlain
+        let apiKey = "c6a1c7e2e9eda9d872a83caff2d3ca91"
+        switch self {
+        case .trendAll:
+            let params = ["api_key":"\(apiKey)"]
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+        default :
+            let params = ["api_key":"\(apiKey)"]
+            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+        }
     }
     
     var headers: [String : String]? {
-        return ["Content-type": "application/json","authorization" : "c6a1c7e2e9eda9d872a83caff2d3ca91"]
+        return ["Content-type": "application/json"]
     }
     
-    var validationType: ValidationType {
-        return .successCodes
-    }
 }
 
 

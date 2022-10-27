@@ -12,6 +12,7 @@
 		5DB6993B43ED431EDC9D6A56 /* libPods-moviewApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 980B538EF102AE91B6B5F287 /* libPods-moviewApp.a */; settings = {ATTRIBUTES = (Required, ); }; };
 		67318C0929026DE7001E4746 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67318C0829026DE6001E4746 /* NetworkManager.swift */; };
 		67318C0B29027909001E4746 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67318C0A29027909001E4746 /* Storage.swift */; };
+		67479747290A48FD00B4FDA3 /* HomeMainSlideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67479746290A48FD00B4FDA3 /* HomeMainSlideViewController.swift */; };
 		6747AC7028FD36A100BCA44A /* TrendAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6747AC6F28FD36A100BCA44A /* TrendAll.swift */; };
 		674BAB0928F6C38E00D88963 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674BAB0828F6C38E00D88963 /* HomeViewController.swift */; };
 		674BAB0B28F6C42500D88963 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 674BAB0A28F6C42500D88963 /* SearchViewController.swift */; };
@@ -61,6 +62,7 @@
 		5AE29E02FDCE0BD9B63729F5 /* Pods-moviewAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviewAppTests.release.xcconfig"; path = "Target Support Files/Pods-moviewAppTests/Pods-moviewAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		67318C0829026DE6001E4746 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		67318C0A29027909001E4746 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		67479746290A48FD00B4FDA3 /* HomeMainSlideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainSlideViewController.swift; sourceTree = "<group>"; };
 		6747AC6F28FD36A100BCA44A /* TrendAll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendAll.swift; sourceTree = "<group>"; };
 		674BAB0828F6C38E00D88963 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		674BAB0A28F6C42500D88963 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,14 @@
 				592D5953F2401F4FEADD0DD6 /* libPods-moviewAppTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		67479745290A470300B4FDA3 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				67479746290A48FD00B4FDA3 /* HomeMainSlideViewController.swift */,
+			);
+			path = SubView;
 			sourceTree = "<group>";
 		};
 		6747AC6E28FD35AD00BCA44A /* Model */ = {
@@ -223,6 +233,7 @@
 		67E67EA128F8126A00DC3FC8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				67479745290A470300B4FDA3 /* SubView */,
 				674BAB0828F6C38E00D88963 /* HomeViewController.swift */,
 				67E67EA228F8127900DC3FC8 /* HomeViewModel.swift */,
 			);
@@ -474,6 +485,7 @@
 				6747AC7028FD36A100BCA44A /* TrendAll.swift in Sources */,
 				67E67E9E28F806A500DC3FC8 /* SearchFlow.swift in Sources */,
 				67E67E9228F8007600DC3FC8 /* MainStep.swift in Sources */,
+				67479747290A48FD00B4FDA3 /* HomeMainSlideViewController.swift in Sources */,
 				6758866A28F65BBB00AD8D4E /* ViewController.swift in Sources */,
 				67E67E9428F800E800DC3FC8 /* MainFlow.swift in Sources */,
 				674BAB0D28F6C43500D88963 /* TheaterViewController.swift in Sources */,
