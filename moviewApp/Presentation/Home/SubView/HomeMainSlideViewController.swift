@@ -15,8 +15,13 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
         if let firstVC = slideViewControllers.first{
             self.setViewControllers([firstVC], direction: .forward, animated: true)
         }
+        setupLayout()
     }
 
+    lazy var pageControls:UIPageControl = {
+       let controls =  UIPageControl()
+        return controls
+    }()
     lazy var slideViewControllers: [UIViewController] = {
         lazy var vc1: UIViewController = {
             let vc  =  UIViewController()
@@ -51,21 +56,45 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupLayout(){
+        view.addSubview(pageControls)
+        pageControls.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
 }
 
 extension HomeMainSlideViewController{
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = slideViewControllers.firstIndex(of: viewController) else { return nil}
         let previousIndex =  index - 1
-        if previousIndex < 0 { return nil }
+        guard previousIndex >= 0 else { return slideViewControllers.last }
+        guard slideViewControllers.count > previousIndex else { return nil }
         return slideViewControllers[previousIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = slideViewControllers.firstIndex(of: viewController) else { return nil }
         let nextIndex = index + 1
-        if nextIndex == slideViewControllers.count { return nil }
+        let viewControllersCount = slideViewControllers.count
+        guard viewControllersCount != nextIndex else { return slideViewControllers.first }
+        guard viewControllersCount > nextIndex else { return nil }
         return slideViewControllers[nextIndex]
+    }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        pageControls.numberOfPages =  slideViewControllers.count
+        return slideViewControllers.count
+    }
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        guard let firstViewController = viewControllers?.first,let firstViewControllerIndex = slideViewControllers.firstIndex(of: firstViewController) else { return 0 }
+        pageControls.currentPage =  firstViewControllerIndex
+        return firstViewControllerIndex
+    }
+    
+    func setupPageControls(){
+        
     }
 }
 
