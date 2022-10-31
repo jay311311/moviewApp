@@ -7,14 +7,19 @@
 
 import UIKit
 import SnapKit
+import RxCocoa
+import RxSwift
 
 class HomeViewController: UIViewController {
     var viewModel: HomeViewModel
+    var disposeBag = DisposeBag()
+    let refreshTrigger =  PublishRelay<Void>()
+    let actionTrigger  =  PublishRelay<HomeActionType>()
+    
     lazy var homeMainSlideView: HomeMainSlideViewController = {
     let mainSlideView = HomeMainSlideViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         return mainSlideView
     }()
-
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -29,7 +34,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupLayout()
+        bindViewModel()
+        refreshTrigger.accept(())
     }
+    
     
     let mainTitle: UILabel = {
         let label = UILabel()
@@ -47,12 +55,13 @@ class HomeViewController: UIViewController {
         }
         homeMainSlideView.view.snp.makeConstraints {
             $0.top.directionalHorizontalEdges.equalToSuperview()
-            $0.height.equalTo(150)
+            $0.height.equalTo(250)
         }
     }
     
-
-
-  
-
+    func bindViewModel(){
+      let res =  viewModel.transform(req: HomeViewModel.Input(refeshTrigger: refreshTrigger, actionTrigger: actionTrigger.asObservable()))
+        homeMainSlideView.setupDI(observable: res.weeklyMovie)
+        homeMainSlideView.setupDI(data: res.weeklyMovieImg)
+    }
 }

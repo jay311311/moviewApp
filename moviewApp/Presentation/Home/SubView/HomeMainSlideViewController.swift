@@ -6,8 +6,11 @@
 //
 import UIKit
 import Foundation
+import RxCocoa
+import RxSwift
 
 class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDelegate,UIPageViewControllerDataSource{
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
@@ -18,31 +21,36 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
         setupLayout()
     }
 
-    lazy var pageControls:UIPageControl = {
+    lazy var pageControls: UIPageControl = {
        let controls =  UIPageControl()
+        controls.currentPageIndicatorTintColor = .white
+        controls.pageIndicatorTintColor = .gray
+        controls.currentPage = 0
+        controls.numberOfPages = slideViewControllers.count
         return controls
     }()
+    
     lazy var slideViewControllers: [UIViewController] = {
         lazy var vc1: UIViewController = {
-            let vc  =  UIViewController()
+            let vc  =  MainSlideViewController()
             vc.view.backgroundColor = .blue
             return vc
         }()
         
         lazy var vc2: UIViewController = {
-            let vc  =  UIViewController()
+            let vc  =  MainSlideViewController()
             vc.view.backgroundColor = .red
             return vc
         }()
         
         lazy var vc3: UIViewController = {
-            let vc  =  UIViewController()
+            let vc  =  MainSlideViewController()
             vc.view.backgroundColor = .yellow
             return vc
         }()
         
         lazy var vc4: UIViewController = {
-            let vc  =  UIViewController()
+            let vc  =  MainSlideViewController()
             vc.view.backgroundColor = .purple
             return vc
         }()
@@ -58,9 +66,24 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
     }
     
     func setupLayout(){
+        view.snp.makeConstraints{
+            $0.height.equalTo(250)
+        }
         view.addSubview(pageControls)
+
         pageControls.snp.makeConstraints {
             $0.center.equalToSuperview()
+        }
+    }
+    
+    func setupDI(observable: BehaviorRelay<[AllInfo]>) {
+        observable.bind { [weak self] result in
+            print(result)
+        }
+    }
+    func setupDI(data : BehaviorRelay<[Data]>) {
+        data.bind { [weak self] result in
+            print(result)
         }
     }
 }
@@ -83,18 +106,16 @@ extension HomeMainSlideViewController{
         return slideViewControllers[nextIndex]
     }
     
-    func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        pageControls.numberOfPages =  slideViewControllers.count
-        return slideViewControllers.count
-    }
-    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-        guard let firstViewController = viewControllers?.first,let firstViewControllerIndex = slideViewControllers.firstIndex(of: firstViewController) else { return 0 }
-        pageControls.currentPage =  firstViewControllerIndex
-        return firstViewControllerIndex
-    }
-    
-    func setupPageControls(){
-        
-    }
+
+//    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+//        print("여기 \(slideViewControllers.count)")
+//        return slideViewControllers.count
+//    }
+//    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+//        guard let firstViewController = viewControllers?.first,let firstViewControllerIndex = slideViewControllers.firstIndex(of: firstViewController) else { return 0 }
+//        print("여기 여기 \(firstViewControllerIndex)")
+//        pageControls.currentPage = firstViewControllerIndex
+//        return firstViewControllerIndex
+//    }
 }
 
