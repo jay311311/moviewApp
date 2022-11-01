@@ -29,8 +29,8 @@ class HomeFlow: Flow {
         switch step{
         case .home:
             return navigateToHomeScreen()
-        case .detail:
-            return .none
+        case .detail(let id):
+            return navigateToDetail()
         default:
             return .none
         }
@@ -40,6 +40,13 @@ class HomeFlow: Flow {
         let viewController = HomeViewController(viewModel: homeStepper)
         self.rootViewController.pushViewController(viewController, animated: false)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: homeStepper))
+    }
+    
+    private func navigateToDetail() -> FlowContributors{
+        let detailStepper = DetailViewModel()
+        let viewController = DetailViewController(viewModel: DetailViewModel() )
+        self.rootViewController.pushViewController(viewController, animated: false)
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: detailStepper))
     }
 }
 

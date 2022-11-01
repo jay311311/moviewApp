@@ -1,4 +1,7 @@
 PODS:
+  - Action (5.0.0):
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
   - Alamofire (5.6.2)
   - Kingfisher (7.4.0)
   - Moya/Core (15.0.0):
@@ -26,6 +29,7 @@ PODS:
   - WeakMapTable (1.2.0)
 
 DEPENDENCIES:
+  - Action
   - Kingfisher (~> 7.0)
   - Moya/RxSwift (~> 15.0)
   - ReactorKit
@@ -38,6 +42,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - Action
     - Alamofire
     - Kingfisher
     - Moya
@@ -52,6 +57,7 @@ SPEC REPOS:
     - WeakMapTable
 
 SPEC CHECKSUMS:
+  Action: 47f1825511907b4fcd79dd7a7db9526c20f78018
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   Kingfisher: 596b207973051aae5e4c54a1c1cb39837ea10d36
   Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
@@ -65,6 +71,6 @@ SPEC CHECKSUMS:
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   WeakMapTable: 05c694ce8439a7a9ebabb56187287a63c57673d6
 
-PODFILE CHECKSUM: 95e63ed16bccaac9dee6f26ea33da5526f4e8258
+PODFILE CHECKSUM: 0537c1a1a064a3e520cc1426480be4c76172e484
 
 COCOAPODS: 1.11.3

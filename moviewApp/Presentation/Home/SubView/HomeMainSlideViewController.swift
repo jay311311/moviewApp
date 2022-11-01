@@ -12,31 +12,24 @@ import RxSwift
 class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDelegate,UIPageViewControllerDataSource{
     let weeklyMovieSlide = BehaviorRelay<[AllInfo]>(value: [])
     var slideViewControllerList: [MainSlideViewController] = []
-    let disposeBag = DisposeBag()
+    let actionRelay =  PublishRelay<HomeActionType>()
 
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
         self.delegate = self
-       
-        setupLayout()
     }
     func setPageViewList(){
         for list in weeklyMovieSlide.value{
-            guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview) else { return }
+            print("\(list.title)")
+            guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview, movieId: list.id) else { return }
+            vc.setupDI(actionRelay: actionRelay)
             vc.view.backgroundColor = .red
             slideViewControllerList.append(vc)
         }
     }
-
-    lazy var pageControls: UIPageControl = {
-       let controls =  UIPageControl()
-        controls.currentPageIndicatorTintColor = .white
-        controls.pageIndicatorTintColor = .gray
-        controls.currentPage = 0
-        controls.numberOfPages = slideViewControllerList.count
-        return controls
-    }()
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
         super.init(transitionStyle: style, navigationOrientation: navigationOrientation)
@@ -51,15 +44,14 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
             self.setViewControllers([firstVC], direction: .forward, animated: true)
         }
     }
-    func setupLayout(){
-        view.addSubview(pageControls)
-        pageControls.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-    }
     
     func setupDI(observable: BehaviorRelay<[AllInfo]>) {
         observable.bind(to: weeklyMovieSlide).disposed(by: disposeBag)
+    }
+    /// 액션 연결.
+    func setupDI(relay: PublishRelay<HomeActionType>) -> Self {
+        actionRelay.bind(to: relay).disposed(by: disposeBag)
+        return self
     }
 }
 
@@ -81,6 +73,13 @@ extension HomeMainSlideViewController{
         return slideViewControllerList[nextIndex]
     }
     
-
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return slideViewControllerList.count
+    }
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        guard let firstViewController = viewControllers?.first,let firstViewControllerIndex = slideViewControllerList.firstIndex(of: firstViewController as! MainSlideViewController) else { return 0 }
+        return firstViewControllerIndex
+    }
+    
 }
 

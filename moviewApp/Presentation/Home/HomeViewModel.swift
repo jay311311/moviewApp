@@ -9,9 +9,10 @@ import Foundation
 import RxFlow
 import RxSwift
 import RxCocoa
+import Action
 
 enum HomeActionType {
-    case tapMainslide
+    case goDetail(id: Int)
     case tapCollectionView
 }
 
@@ -44,10 +45,25 @@ class HomeViewModel: Stepper {
         req.refeshTrigger.bind { [weak self] _ in
             self?.getDatas()
         }
+        //액션 트리거 연동
+        req.actionTrigger.bind(onNext: doAction).disposed(by: dispoaseBag)
         
      
         return Output(weeklyMovie: weeklyMovie )
     }
     
+    private func doAction(_ actionType: HomeActionType){
+        switch actionType {
+        case .goDetail(let id):
+            goDetail(id)
+        case .tapCollectionView:
+            break
+            
+        }
+        
+    }
+    func goDetail(_ id: Int){
+        steps.accept(MainStep.detail(id: id))
+    }
 
 }

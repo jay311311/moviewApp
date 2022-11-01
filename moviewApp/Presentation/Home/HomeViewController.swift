@@ -36,7 +36,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+//        self.view.backgroundColor = .white
         setupLayout()
         bindViewModel()
         refreshTrigger.accept(())
@@ -57,6 +57,7 @@ class HomeViewController: UIViewController {
         subview.snp.makeConstraints{
             $0.directionalHorizontalEdges.equalToSuperview()
             $0.top.equalTo(homeMainSlideView.view.snp.bottom)
+            // 수정예정
             $0.height.equalTo(200)
         }
         homeMainSlideView.view.snp.makeConstraints {
@@ -69,5 +70,6 @@ class HomeViewController: UIViewController {
     func bindViewModel(){
       let res =  viewModel.transform(req: HomeViewModel.Input(refeshTrigger: refreshTrigger, actionTrigger: actionTrigger.asObservable()))
         homeMainSlideView.setupDI(observable: res.weeklyMovie)
+        homeMainSlideView.setupDI(relay: actionTrigger)
     }
 }

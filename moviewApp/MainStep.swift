@@ -16,7 +16,7 @@ enum MainStep: Step{
     case home
     case search
     case category
-    case detail
+    case detail(id: Int)
 }
 
 
