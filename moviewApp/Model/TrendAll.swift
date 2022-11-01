@@ -15,9 +15,9 @@ struct TrendAll: Codable {
 
 struct AllInfo: Codable {
     let adult: Bool
-    let backdrop_path: String
+    let backdrop_path: String?
     let id: Int
-    let title: String?
+    let title: String
     let overview: String
     let poster_path: String
     let media_type : String

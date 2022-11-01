@@ -19,7 +19,6 @@ class HomeViewModel: Stepper {
     let steps = PublishRelay<Step>()
     let dispoaseBag  = DisposeBag()
     let weeklyMovie =  BehaviorRelay<[AllInfo]>(value: [])
-    let weeklyMovieImg =  BehaviorRelay<[Data]>(value: [])
     let network  = NetworkManager.shared
     let backgroudn_url = ""
     
@@ -32,7 +31,6 @@ class HomeViewModel: Stepper {
     
     struct Output {
         let weeklyMovie: BehaviorRelay<[AllInfo]>
-        let weeklyMovieImg : BehaviorRelay<[Data]>
     }
     
     func getDatas() {
@@ -46,20 +44,10 @@ class HomeViewModel: Stepper {
         req.refeshTrigger.bind { [weak self] _ in
             self?.getDatas()
         }
-        urlToImage(weeklyMovie.value)
         
      
-        return Output(weeklyMovie: weeklyMovie, weeklyMovieImg: weeklyMovieImg )
+        return Output(weeklyMovie: weeklyMovie )
     }
     
-    func urlToImage(_ datas: [AllInfo]) {
-        for data in datas {
-            let url =  URL(string : "https://image.tmdb.org/t/p/w500\(data.backdrop_path)")!
-            let data = try? Data(contentsOf: url)
-            var value = weeklyMovieImg.value
-            value.append(data!)
-            weeklyMovieImg.accept(value)
-            print("여기. \(weeklyMovieImg.value)")
-        }
-    }
+
 }

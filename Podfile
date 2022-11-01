@@ -10,6 +10,7 @@ target 'moviewApp' do
     pod 'SnapKit', '~> 5.6.0'
     pod 'Moya/RxSwift', '~> 15.0'
     pod 'ReactorKit'
+    pod 'Kingfisher', '~> 7.0'
 
   # Pods for moviewApp
 
