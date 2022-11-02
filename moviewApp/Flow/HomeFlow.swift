@@ -54,9 +54,5 @@ class HomeFlow: Flow {
 class HomeStepper: Stepper{
     var steps = PublishRelay<Step>()
 
-    
-    var initialStep: Step {
-        return MainStep.home
-    }
 }
 

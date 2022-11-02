@@ -29,8 +29,7 @@ class MainFlow: Flow {
             return navigateToLoginScreen()
         case .logoutStatus:
             return navigateToLogoutScreen()
-        case .detail(let id):
-            return navigateToDetail(id: id)
+  
         default:
             return .none
         }
@@ -67,13 +66,7 @@ class MainFlow: Flow {
     private func navigateToLogoutScreen() -> FlowContributors {
         return .none
     }
-    private func navigateToDetail(id: Int) -> FlowContributors{
-        let detailStepper = DetailViewModel()
-        let viewController = DetailViewController(viewModel: DetailViewModel(),id: id )
-        self.rootViewController.navigationController?.pushViewController(viewController, animated: false)
-//        self.rootViewController.pushViewController(viewController, animated: false)
-        return .none
-    }
+
 }
 
 

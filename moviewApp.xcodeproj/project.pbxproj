@@ -164,6 +164,22 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		674C59302912645A00847958 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				674C59312912646700847958 /* Detail */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		674C59312912646700847958 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				67E67E9928F804D400DC3FC8 /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		6758865928F65BBB00AD8D4E = {
 			isa = PBXGroup;
 			children = (
@@ -238,7 +254,7 @@
 		67E67E9828F8044100DC3FC8 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				67E67E9928F804D400DC3FC8 /* DetailViewController.swift */,
+				674C59302912645A00847958 /* Common */,
 				67E67EA728F8146500DC3FC8 /* Theater */,
 				67E67EA428F8140D00DC3FC8 /* Search */,
 				67E67EA128F8126A00DC3FC8 /* Home */,

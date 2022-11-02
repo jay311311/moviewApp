@@ -49,7 +49,5 @@ class DetailViewController: UIViewController {
 
 class DetailViewModel: Stepper {
     var steps = PublishRelay<Step>()
-    
-    
-    
+ 
 }
