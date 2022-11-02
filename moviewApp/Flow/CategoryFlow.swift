@@ -42,3 +42,13 @@ class CategoryFlow: Flow {
     
     
 }
+
+
+class CategoryStepper:Stepper{
+    var steps = PublishRelay<Step>()
+    
+    
+    var initialStep: Step{
+        return MainStep.category
+    }
+}

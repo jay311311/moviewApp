@@ -57,7 +57,7 @@ class HomeViewModel: Stepper {
         case .goDetail(let id):
             goDetail(id)
         case .tapCollectionView:
-            break
+           break
             
         }
         
@@ -65,5 +65,5 @@ class HomeViewModel: Stepper {
     func goDetail(_ id: Int){
         steps.accept(MainStep.detail(id: id))
     }
-
+    
 }

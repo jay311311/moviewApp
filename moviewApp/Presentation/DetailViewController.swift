@@ -14,9 +14,12 @@ import RxCocoa
 class DetailViewController: UIViewController {
 
     let viewModel : DetailViewModel
+    let id : Int
     
-    init(viewModel: DetailViewModel) {
+    init(viewModel: DetailViewModel, id:Int) {
         self.viewModel = viewModel
+        self.id = id
+        mainTitle.text = "\(id)"
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,7 +29,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
         setupUI()
     }
     

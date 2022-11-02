@@ -18,9 +18,9 @@ class HomeFlow: Flow {
     
     private let rootViewController = UINavigationController()
 //    private let networkService: NetworkService
-    private let homeStepper: HomeViewModel
+    private let homeStepper: HomeStepper
     
-    init(withStepper steppers: HomeViewModel){
+    init(withStepper steppers: HomeStepper){
         self.homeStepper = steppers
     }
     
@@ -30,23 +30,33 @@ class HomeFlow: Flow {
         case .home:
             return navigateToHomeScreen()
         case .detail(let id):
-            return navigateToDetail()
+            return navigateToDetail(id)
         default:
             return .none
         }
     }
     
     private func navigateToHomeScreen() -> FlowContributors {
-        let viewController = HomeViewController(viewModel: homeStepper)
-        self.rootViewController.pushViewController(viewController, animated: false)
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: homeStepper))
+        let viewController = HomeViewController(viewModel: HomeViewModel())
+        rootViewController.pushViewController(viewController, animated: false)
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
     
-    private func navigateToDetail() -> FlowContributors{
-        let detailStepper = DetailViewModel()
-        let viewController = DetailViewController(viewModel: DetailViewModel() )
+    private func navigateToDetail(_ id:Int) -> FlowContributors{
+        let viewController = DetailViewController(viewModel: DetailViewModel(), id:id)
         self.rootViewController.pushViewController(viewController, animated: false)
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: detailStepper))
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
+    }
+    
+
+}
+
+class HomeStepper: Stepper{
+    var steps = PublishRelay<Step>()
+
+    
+    var initialStep: Step {
+        return MainStep.home
     }
 }
 

@@ -49,9 +49,8 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
         observable.bind(to: weeklyMovieSlide).disposed(by: disposeBag)
     }
     /// 액션 연결.
-    func setupDI(relay: PublishRelay<HomeActionType>) -> Self {
+    func setupDI(relay: PublishRelay<HomeActionType>) {
         actionRelay.bind(to: relay).disposed(by: disposeBag)
-        return self
     }
 }
 
