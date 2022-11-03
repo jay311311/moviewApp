@@ -1,5 +1,5 @@
 //
-//  SearchFlow.swift
+//  TopRateFlow.swift
 //  moviewApp
 //
 //  Created by Jooeun Kim on 2022/10/13.
@@ -10,43 +10,41 @@ import UIKit
 import RxFlow
 import RxCocoa
 
-class SearchFlow: Flow {
+class TopRateFlow: Flow {
     
     var root: Presentable {
         return self.rootViewController
     }
     
     private let rootViewController = UINavigationController()
-//    private let networkService: NetworkService
-    private let searchStepper: SearStepper
+    private let topRateStepper: TopRateStepper
     
-    init( withStepper steppers: SearStepper){
-//        self.networkService = services
-        self.searchStepper =  steppers
+    init( withStepper steppers: TopRateStepper){
+        self.topRateStepper =  steppers
     }
     
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? MainStep else { return .none }
         switch step {
-        case .search:
-            return  navigateToSearchScreen()
+        case .topRate:
+            return  navigateToTopRateScreen()
         default:
             return .none
         }
     }
     
-    private func navigateToSearchScreen() -> FlowContributors {
-        let viewController = SearchViewController(viewModel: SearchViewModel())
+    private func navigateToTopRateScreen() -> FlowContributors {
+        let viewController = TopRateViewController(viewModel: TopRateViewModel())
         self.rootViewController.pushViewController(viewController, animated: true)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
 }
 
 
-class SearStepper: Stepper{
+class TopRateStepper: Stepper{
     var steps = PublishRelay<Step>()
     
     var initialStep: Step{
-        return MainStep.search
+        return MainStep.topRate
     }
 }

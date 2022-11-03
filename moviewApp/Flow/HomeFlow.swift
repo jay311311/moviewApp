@@ -17,7 +17,6 @@ class HomeFlow: Flow {
     }
     
     private let rootViewController = UINavigationController()
-//    private let networkService: NetworkService
     private let homeStepper: HomeStepper
     
     init(withStepper steppers: HomeStepper){

@@ -9,9 +9,9 @@ import Foundation
 import Moya
 
 enum NetworkService {
-    case trendAll
     case trendMovie
-    case trendTV
+    case topRateMovie
+    case topRateTV
     case search(word:String)
 }
 
@@ -22,14 +22,14 @@ extension NetworkService: TargetType {
     
     var path: String {
         switch self {
-        case .trendAll:
-            return "trending/movie/week"
         case .trendMovie:
-            return "movie/top_rated/"
-        case .trendTV:
-            return "tv/top_rated/"
+            return "trending/movie/week"
+        case .topRateMovie:
+            return "movie/top_rated"
+        case .topRateTV:
+            return "tv/top_rated"
         case .search(let word):
-            return "search/multi/query=\(word)"
+            return "search/multi"
         }
     }
     
@@ -38,10 +38,10 @@ extension NetworkService: TargetType {
     }
     
     var task: Moya.Task {
-        let apiKey = "c6a1c7e2e9eda9d872a83caff2d3ca91"
+        let apiKey = Storage().apiKey
         switch self {
-        case .trendAll:
-            let params = ["api_key":"\(apiKey)"]
+        case .search(let word):
+            let params = ["api_key":"\(apiKey)","query":"\(word)"]
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         default :
             let params = ["api_key":"\(apiKey)"]

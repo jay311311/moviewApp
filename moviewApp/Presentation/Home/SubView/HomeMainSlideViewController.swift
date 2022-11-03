@@ -23,7 +23,6 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
     }
     func setPageViewList(){
         for list in weeklyMovieSlide.value{
-            print("\(list.title)")
             guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview, movieId: list.id) else { return }
             vc.setupDI(actionRelay: actionRelay)
             vc.view.backgroundColor = .red

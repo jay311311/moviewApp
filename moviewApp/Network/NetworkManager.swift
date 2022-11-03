@@ -15,11 +15,11 @@ class NetworkManager {
     let provider = MoyaProvider<NetworkService>()
     private init() { }
     
-    func getData() -> Observable<TrendAll> {
-        return  provider.rx.request(.trendAll)
+    func getData<T:Codable>(path : NetworkService, _ type:T.Type) -> Observable<T> {
+        return  provider.rx.request(path)
             .filterSuccessfulStatusCodes()
             .asObservable()
-            .map{try JSONDecoder().decode(TrendAll.self, from: $0.data) }
+            .map{try JSONDecoder().decode(T.self, from: $0.data) }
     }
 }
 

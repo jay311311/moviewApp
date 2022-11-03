@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        refreshTrigger.accept(())
     }
     
     required init?(coder: NSCoder) {
@@ -36,12 +37,9 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.backgroundColor = .white
         setupLayout()
         bindViewModel()
-        refreshTrigger.accept(())
     }
-    
     
     let mainTitle: UILabel = {
         let label = UILabel()
@@ -68,7 +66,7 @@ class HomeViewController: UIViewController {
     }
     
     func bindViewModel(){
-      let res =  viewModel.transform(req: HomeViewModel.Input(refeshTrigger: refreshTrigger, actionTrigger: actionTrigger.asObservable()))
+        let res =  viewModel.transform(req: HomeViewModel.Input(refeshTrigger: refreshTrigger.asObservable(), actionTrigger: actionTrigger.asObservable()))
         homeMainSlideView.setupDI(observable: res.weeklyMovie)
         homeMainSlideView.setupDI(relay: actionTrigger)
     }

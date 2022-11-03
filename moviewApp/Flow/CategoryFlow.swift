@@ -16,11 +16,9 @@ class CategoryFlow: Flow {
     }
     
     private let rooViewController = UINavigationController()
-//    private let networkService: NetworkService
-    private let categoryStepper: CategoryViewModel
+    private let categoryStepper: CategoryStepper
     
-    init(withStepper steppers: CategoryViewModel) {
-//        self.networkService = services
+    init(withStepper steppers: CategoryStepper) {
         self.categoryStepper =  steppers
     }
     func navigate(to step: Step) -> FlowContributors {
@@ -35,9 +33,9 @@ class CategoryFlow: Flow {
     }
     
     func navigateToCategoryScreen() -> FlowContributors {
-        let viewController = CategoryViewController(viewModel: categoryStepper)
+        let viewController = CategoryViewController(viewModel: CategoryViewModel())
         self.rooViewController.pushViewController(viewController, animated: true)
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: categoryStepper))
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
     
     

@@ -14,7 +14,7 @@ enum MainStep: Step{
     case logoutStatus
     
     case home
-    case search
+    case topRate
     case category
     case detail(id: Int)
 }
