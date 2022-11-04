@@ -92,7 +92,7 @@ class MainSlideViewController: UIViewController {
             $0.bottom.directionalHorizontalEdges.equalToSuperview()
         }
     }
-    func setupDI(actionRelay : PublishRelay<HomeActionType>) -> Self{
+    func setupDI(actionRelay: PublishRelay<HomeActionType>) -> Self {
         action.bind(to: actionRelay).disposed(by: dispoaseBag)
         return self
     }

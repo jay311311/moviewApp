@@ -55,11 +55,11 @@ class MainFlow: Flow {
         }
         
         return .multiple(flowContributors: [.contribute(withNextPresentable: homeFlow,
-                                                        withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.home), homeStepper])),
+                                                        withNextStepper:homeStepper),
                                             .contribute(withNextPresentable: topRateFlow,
-                                                        withNextStepper: OneStepper(withSingleStep: topRateStepper.initialStep)),
+                                                        withNextStepper: topRateStepper),
                                             .contribute(withNextPresentable: categoryFlow ,
-                                                        withNextStepper: OneStepper(withSingleStep: categoryStepper.initialStep))
+                                                        withNextStepper: categoryStepper)
         ])
     }
     

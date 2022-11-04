@@ -14,14 +14,15 @@ class TopRateViewController: UIViewController {
     
     var viewModel: TopRateViewModel
     let refreshTrigger = PublishRelay<Void>()
-    var actionrelay = PublishRelay<TopRateActionType>()
-    var topRateMovie = BehaviorRelay<[TopRateMovie]>(value: [])
+    var actionRelay = PublishRelay<TopRateActionType>()
+//    var topRateMovie = BehaviorRelay<[TopRateMovie]>(value: [])
     var topRateTV = BehaviorRelay<[TopRateTV]>(value: [])
     
     init(viewModel: TopRateViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         refreshTrigger.accept(())
+
     }
     
     required init?(coder: NSCoder) {
@@ -30,8 +31,10 @@ class TopRateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavigationTitle()
         setupLayout()
         bindViewModel()
+        
     }
 
     lazy var subViews: TopRateView = {
@@ -39,6 +42,11 @@ class TopRateViewController: UIViewController {
         return view
     }()
 
+    func setupNavigationTitle(){
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationItem.title = "Top Rate"
+    }
     func setupLayout() {
         self.view.addSubview(subViews)
         subViews.snp.makeConstraints{
@@ -47,9 +55,10 @@ class TopRateViewController: UIViewController {
     }
     
     func bindViewModel(){
-       let result = viewModel.transform(req: TopRateViewModel.Input(refreshTrigger: refreshTrigger.asObservable(), TopRateAcionTrigger: actionrelay.asObservable()))
-        if let movieResult = result.topRateMovie {
-            topRateMovie.accept(movieResult.value)
-        }
+       let result = viewModel.transform(req: TopRateViewModel.Input(refreshTrigger: refreshTrigger.asObservable(), TopRateAcionTrigger: actionRelay.asObservable()))
+
+//            topRateMovie.accept(movieResult.value)
+            subViews.topRatePalleteView.setupDI(actionRely: actionRelay)
+        subViews.topRatePalleteView.setupDI(dataRelay: result.topRateMovie)
     }
 }

@@ -9,11 +9,9 @@ import Foundation
 import RxFlow
 import RxSwift
 import RxCocoa
-import Action
 
 enum HomeActionType {
     case goDetail(id: Int)
-    case tapCollectionView
 }
 
 class HomeViewModel: Stepper {
@@ -47,7 +45,6 @@ class HomeViewModel: Stepper {
         //액션 트리거 연동
         req.actionTrigger.bind(onNext: doAction).disposed(by: dispoaseBag)
         
-     
         return Output(weeklyMovie: weeklyMovie )
     }
     
@@ -55,12 +52,9 @@ class HomeViewModel: Stepper {
         switch actionType {
         case .goDetail(let id):
             goDetail(id)
-        case .tapCollectionView:
-           break
-            
         }
-        
     }
+    
     func goDetail(_ id: Int){
         steps.accept(MainStep.detail(id: id))
     }
