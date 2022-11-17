@@ -16,7 +16,6 @@ class MainSlideViewController: UIViewController {
     var posterURL: String = ""
     var overview: String = ""
     var movieId: Int? = nil
-//    var mainSlideTapRelay = PublishRelay<Int>()
     /// action relay
     var action = PublishRelay<HomeActionType>()
     let dispoaseBag = DisposeBag()
@@ -92,6 +91,7 @@ class MainSlideViewController: UIViewController {
             $0.bottom.directionalHorizontalEdges.equalToSuperview()
         }
     }
+    
     func setupDI(actionRelay: PublishRelay<HomeActionType>) -> Self {
         action.bind(to: actionRelay).disposed(by: dispoaseBag)
         return self

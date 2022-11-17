@@ -9,10 +9,10 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDelegate,UIPageViewControllerDataSource{
+class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource{
     let weeklyMovieSlide = BehaviorRelay<[AllInfo]>(value: [])
     var slideViewControllerList: [MainSlideViewController] = []
-    let actionRelay =  PublishRelay<HomeActionType>()
+    let actionRelay = PublishRelay<HomeActionType>()
 
     let disposeBag = DisposeBag()
     
@@ -21,16 +21,15 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
         self.dataSource = self
         self.delegate = self
     }
-    func setPageViewList(){
-        for list in weeklyMovieSlide.value{
+    func setPageViewList() {
+        for list in weeklyMovieSlide.value {
             guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview, movieId: list.id) else { return }
             vc.setupDI(actionRelay: actionRelay)
-            vc.view.backgroundColor = .red
             slideViewControllerList.append(vc)
         }
     }
     
-    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey : Any]? = nil) {
+    override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
         super.init(transitionStyle: style, navigationOrientation: navigationOrientation)
     }
     
@@ -39,7 +38,7 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
     }
     override func viewDidAppear(_ animated: Bool) {
         setPageViewList()
-        if let firstVC = slideViewControllerList.first{
+        if let firstVC = slideViewControllerList.first {
             self.setViewControllers([firstVC], direction: .forward, animated: true)
         }
     }
@@ -53,10 +52,10 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
     }
 }
 
-extension HomeMainSlideViewController{
+extension HomeMainSlideViewController {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = slideViewControllerList.firstIndex(of: viewController as! MainSlideViewController) else { return nil}
-        let previousIndex =  index - 1
+        let previousIndex = index - 1
         guard previousIndex >= 0 else { return slideViewControllerList.last }
         guard slideViewControllerList.count > previousIndex else { return nil }
         return slideViewControllerList[previousIndex]
@@ -74,10 +73,10 @@ extension HomeMainSlideViewController{
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return slideViewControllerList.count
     }
+    
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         guard let firstViewController = viewControllers?.first,let firstViewControllerIndex = slideViewControllerList.firstIndex(of: firstViewController as! MainSlideViewController) else { return 0 }
         return firstViewControllerIndex
     }
-    
 }
 

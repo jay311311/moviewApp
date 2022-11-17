@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class HomeView : UIView{
-    lazy var container :UIView = {
+class HomeView: UIView{
+    lazy var container: UIView = {
         let view = UIView()
         view.backgroundColor = .blue
         return view

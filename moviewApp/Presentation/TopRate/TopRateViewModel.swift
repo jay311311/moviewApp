@@ -9,43 +9,44 @@ import RxFlow
 import RxSwift
 import RxCocoa
 
-enum TopRateActionType{
+enum TopRateActionType {
     case goDetail
     case tapMovieSegment
     case tapEpisodeSegment
 }
 
-class TopRateViewModel: Stepper  {
+class TopRateViewModel: Stepper {
     let steps = PublishRelay<Step>()
     let movieResult = BehaviorRelay<[TopRateMovie]>(value: [])
     var tvResult = BehaviorRelay<[TopRateTV]>(value: [])
-    let network  = NetworkManager.shared
-    let disposeBag  = DisposeBag()
+    let network = NetworkManager.shared
+    let disposeBag = DisposeBag()
     
-    init(){  }
+    init(){
+        getDatas()
+    }
     
-    struct Input{
-        var refreshTrigger : Observable<Void>
-        var TopRateAcionTrigger : Observable<TopRateActionType>
+    struct Input {
+        var refreshTrigger: Observable<Void>
+        var TopRateAcionTrigger: Observable<TopRateActionType>
     }
     
     struct Output{
         var topRateMovie : BehaviorRelay<[TopRateMovie]>
-//        var topRateTV : BehaviorRelay<[TopRateTV]>?
     }
     
     func transform(req : TopRateViewModel.Input) -> TopRateViewModel.Output{
         req.refreshTrigger.bind{[weak self] _ in
-            self?.getDatas()
+            print("확인용")
         }
         req.TopRateAcionTrigger.bind(onNext: doAction).disposed(by: disposeBag)
         print("뷰모델 넘 \(self.movieResult.value)")
         return Output(topRateMovie: movieResult)
     }
     
-    func getDatas(){
+    func getDatas() {
         network.getData(path: .topRateMovie, TopRateMovies.self)
-            .subscribe(onNext:{ [weak self]  in
+            .subscribe(onNext:{ [weak self] in
                 self?.movieResult.accept($0.results)
             }).disposed(by: disposeBag)
     }
@@ -69,8 +70,5 @@ class TopRateViewModel: Stepper  {
     }
     func tapEpisodeSegment(){
         print("티비 탭")
-
     }
-    
-    
 }

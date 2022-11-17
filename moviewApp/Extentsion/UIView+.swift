@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-extension UIView{
-    func addSubviews(_ views:[UIView]) {
-        views.map{ self.addSubview($0)}
+extension UIView {
+    func addSubviews(_ views: [UIView]) {
+        views.map{ self.addSubview($0) }
     }
 }

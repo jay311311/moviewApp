@@ -16,7 +16,7 @@ class MainFlow: Flow {
     }
     private let rootViewController = UITabBarController()
     
-    init() {}
+    init() { }
     
     deinit {
         print("이것 전역에 있을꺼여서 절때 deinit될수 없도다")
@@ -29,7 +29,6 @@ class MainFlow: Flow {
             return navigateToLoginScreen()
         case .logoutStatus:
             return navigateToLogoutScreen()
-  
         default:
             return .none
         }
@@ -55,25 +54,20 @@ class MainFlow: Flow {
         }
         
         return .multiple(flowContributors: [.contribute(withNextPresentable: homeFlow,
-                                                        withNextStepper:homeStepper),
+                                                        withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.home), homeStepper])),
                                             .contribute(withNextPresentable: topRateFlow,
-                                                        withNextStepper: topRateStepper),
-                                            .contribute(withNextPresentable: categoryFlow ,
-                                                        withNextStepper: categoryStepper)
+                                                        withNextStepper: OneStepper(withSingleStep: topRateStepper.initialStep)),
+                                            .contribute(withNextPresentable: categoryFlow, withNextStepper: OneStepper(withSingleStep:categoryStepper.initialStep))
         ])
     }
-    
     private func navigateToLogoutScreen() -> FlowContributors {
         return .none
     }
-
 }
 
 
 class MainStepper: Stepper {
     let steps = PublishRelay<Step>()
-//    private let networkServices: NetworkService
-    
     init() {}
     
     var initialStep: Step {

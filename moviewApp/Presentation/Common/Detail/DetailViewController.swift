@@ -13,8 +13,8 @@ import RxCocoa
 
 class DetailViewController: UIViewController {
 
-    let viewModel : DetailViewModel
-    let id : Int
+    let viewModel: DetailViewModel
+    let id: Int
     
     init(viewModel: DetailViewModel, id:Int) {
         self.viewModel = viewModel
@@ -49,5 +49,4 @@ class DetailViewController: UIViewController {
 
 class DetailViewModel: Stepper {
     var steps = PublishRelay<Step>()
- 
 }

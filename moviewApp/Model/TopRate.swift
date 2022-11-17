@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct TopRateMovies: Codable{
+struct TopRateMovies: Codable {
     var page: Int
     var results: [TopRateMovie]
 }
 
-struct TopRateMovie: Codable{
+struct TopRateMovie: Codable {
     var adult: Bool
     var title: String
     var id: Int
@@ -20,12 +20,12 @@ struct TopRateMovie: Codable{
     var poster_path: String
 }
 
-struct TopRateTVs: Codable{
+struct TopRateTVs: Codable {
     var page: Int
     var results: [TopRateTV]
 }
 
-struct TopRateTV: Codable{
+struct TopRateTV: Codable {
     var name: String
     var id: Int
     var vote_average: Double

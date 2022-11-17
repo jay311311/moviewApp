@@ -15,7 +15,6 @@ class TopRateViewController: UIViewController {
     var viewModel: TopRateViewModel
     let refreshTrigger = PublishRelay<Void>()
     var actionRelay = PublishRelay<TopRateActionType>()
-//    var topRateMovie = BehaviorRelay<[TopRateMovie]>(value: [])
     var topRateTV = BehaviorRelay<[TopRateTV]>(value: [])
     
     init(viewModel: TopRateViewModel) {
@@ -38,13 +37,12 @@ class TopRateViewController: UIViewController {
     }
 
     lazy var subViews: TopRateView = {
-       let view  =  TopRateView()
+       let view = TopRateView()
         return view
     }()
 
     func setupNavigationTitle(){
         self.navigationController?.navigationBar.prefersLargeTitles = true
-//        self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.title = "Top Rate"
     }
     func setupLayout() {
@@ -54,11 +52,10 @@ class TopRateViewController: UIViewController {
         }
     }
     
-    func bindViewModel(){
-       let result = viewModel.transform(req: TopRateViewModel.Input(refreshTrigger: refreshTrigger.asObservable(), TopRateAcionTrigger: actionRelay.asObservable()))
-
-//            topRateMovie.accept(movieResult.value)
-            subViews.topRatePalleteView.setupDI(actionRely: actionRelay)
+    func bindViewModel() {
+        let result = viewModel.transform(req: TopRateViewModel.Input(refreshTrigger: refreshTrigger.asObservable(), TopRateAcionTrigger: actionRelay.asObservable()))
+        
+        subViews.topRatePalleteView.setupDI(actionRely: actionRelay)
         subViews.topRatePalleteView.setupDI(dataRelay: result.topRateMovie)
     }
 }

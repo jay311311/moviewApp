@@ -16,15 +16,15 @@ enum HomeActionType {
 
 class HomeViewModel: Stepper {
     let steps = PublishRelay<Step>()
-    let dispoaseBag  = DisposeBag()
-    let weeklyMovie =  BehaviorRelay<[AllInfo]>(value: [])
-    let network  = NetworkManager.shared
+    let dispoaseBag = DisposeBag()
+    let weeklyMovie = BehaviorRelay<[AllInfo]>(value: [])
+    let network = NetworkManager.shared
     
     init(){  }
     
-    struct Input{
-        let refeshTrigger : Observable<Void>
-        let actionTrigger  : Observable<HomeActionType>
+    struct Input {
+        let refeshTrigger: Observable<Void>
+        let actionTrigger: Observable<HomeActionType>
     }
     
     struct Output {
@@ -38,7 +38,7 @@ class HomeViewModel: Stepper {
             }).disposed(by: dispoaseBag)
     }
     
-    func transform(req: HomeViewModel.Input) -> HomeViewModel.Output{
+    func transform(req: HomeViewModel.Input) -> HomeViewModel.Output {
         req.refeshTrigger.bind { [weak self] _ in
             self?.getDatas()
         }
@@ -48,7 +48,7 @@ class HomeViewModel: Stepper {
         return Output(weeklyMovie: weeklyMovie )
     }
     
-    private func doAction(_ actionType: HomeActionType){
+    private func doAction(_ actionType: HomeActionType) {
         switch actionType {
         case .goDetail(let id):
             goDetail(id)

@@ -23,7 +23,6 @@ class TopRateView: UIView {
     
     lazy var topRatePalleteView: TopRatePalleteview = {
        let palletScroll = TopRatePalleteview()
-        
         return palletScroll
     }()
     
@@ -35,11 +34,11 @@ class TopRateView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func tapSegmentControl(){
+    @objc func tapSegmentControl() {
          print("탭했따")
      }
     
-    func setupLayout(){
+    func setupLayout() {
         addSubviews([segmentControl, topRatePalleteView])
         segmentControl.snp.makeConstraints {
             $0.top.leading.equalToSuperview()

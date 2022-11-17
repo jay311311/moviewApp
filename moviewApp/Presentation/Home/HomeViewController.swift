@@ -13,8 +13,8 @@ import RxSwift
 class HomeViewController: UIViewController {
     var viewModel: HomeViewModel
     var disposeBag = DisposeBag()
-    let refreshTrigger =  PublishRelay<Void>()
-    let actionTrigger  =  PublishRelay<HomeActionType>()
+    let refreshTrigger = PublishRelay<Void>()
+    let actionTrigger = PublishRelay<HomeActionType>()
     
     lazy var homeMainSlideView: HomeMainSlideViewController = {
     let mainSlideView = HomeMainSlideViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
@@ -52,21 +52,19 @@ class HomeViewController: UIViewController {
         view.addSubview(homeMainSlideView.view)
         view.addSubview(subview)
         
-        subview.snp.makeConstraints{
+        subview.snp.makeConstraints {
             $0.directionalHorizontalEdges.equalToSuperview()
             $0.top.equalTo(homeMainSlideView.view.snp.bottom)
-            // 수정예정
             $0.height.equalTo(200)
         }
         homeMainSlideView.view.snp.makeConstraints {
             $0.top.directionalHorizontalEdges.equalToSuperview()
-            // 수정예정
             $0.height.equalTo(550)
         }
     }
     
-    func bindViewModel(){
-        let res =  viewModel.transform(req: HomeViewModel.Input(refeshTrigger: refreshTrigger.asObservable(), actionTrigger: actionTrigger.asObservable()))
+    func bindViewModel() {
+        let res = viewModel.transform(req: HomeViewModel.Input(refeshTrigger: refreshTrigger.asObservable(), actionTrigger: actionTrigger.asObservable()))
         homeMainSlideView.setupDI(observable: res.weeklyMovie)
         homeMainSlideView.setupDI(relay: actionTrigger)
     }

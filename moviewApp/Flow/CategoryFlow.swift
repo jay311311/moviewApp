@@ -19,17 +19,16 @@ class CategoryFlow: Flow {
     private let categoryStepper: CategoryStepper
     
     init(withStepper steppers: CategoryStepper) {
-        self.categoryStepper =  steppers
+        self.categoryStepper = steppers
     }
     func navigate(to step: Step) -> FlowContributors {
-        guard let step  = step as? MainStep else { return .none }
+        guard let step = step as? MainStep else { return .none }
         switch step {
         case .category:
             return navigateToCategoryScreen()
         default:
             return .none
         }
-        
     }
     
     func navigateToCategoryScreen() -> FlowContributors {
@@ -37,16 +36,11 @@ class CategoryFlow: Flow {
         self.rooViewController.pushViewController(viewController, animated: true)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
-    
-    
 }
 
-
-class CategoryStepper:Stepper{
+class CategoryStepper: Stepper {
     var steps = PublishRelay<Step>()
-    
-    
-    var initialStep: Step{
+    var initialStep: Step {
         return MainStep.category
     }
 }

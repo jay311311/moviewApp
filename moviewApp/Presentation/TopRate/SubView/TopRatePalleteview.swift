@@ -34,7 +34,6 @@ class TopRatePalleteview: UIScrollView {
     }
     func setupDI(dataRelay: BehaviorRelay<[TopRateMovie]>){
         result.bind(to: dataRelay).disposed(by: disposeBag)
-        print("넘어옴 \(result.value)")
     }
     
 }

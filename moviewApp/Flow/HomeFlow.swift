@@ -12,20 +12,20 @@ import RxSwift
 import RxCocoa
 
 class HomeFlow: Flow {
-    var root : Presentable {
+    var root: Presentable {
         return self.rootViewController
     }
     
     private let rootViewController = UINavigationController()
     private let homeStepper: HomeStepper
     
-    init(withStepper steppers: HomeStepper){
+    init(withStepper steppers: HomeStepper) {
         self.homeStepper = steppers
     }
     
     func navigate(to step: Step) -> FlowContributors {
-        guard let step = step as? MainStep  else { return .none }
-        switch step{
+        guard let step = step as? MainStep else { return .none }
+        switch step {
         case .home:
             return navigateToHomeScreen()
         case .detail(let id):
@@ -41,19 +41,15 @@ class HomeFlow: Flow {
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
     
-    private func navigateToDetail(_ id:Int) -> FlowContributors{
+    private func navigateToDetail(_ id:Int) -> FlowContributors {
         let viewController = DetailViewController(viewModel: DetailViewModel(), id:id)
+        viewController.hidesBottomBarWhenPushed = true
         self.rootViewController.pushViewController(viewController, animated: false)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
-    
-
 }
 
 class HomeStepper: Stepper{
     var steps = PublishRelay<Step>()
-    var initialStep: Step {
-        return MainStep.home
-    }
 }
 

@@ -19,7 +19,7 @@ class TopRateFlow: Flow {
     private let rootViewController = UINavigationController()
     private let topRateStepper: TopRateStepper
     
-    init( withStepper steppers: TopRateStepper){
+    init(withStepper steppers: TopRateStepper){
         self.topRateStepper =  steppers
     }
     
@@ -41,7 +41,7 @@ class TopRateFlow: Flow {
 }
 
 
-class TopRateStepper: Stepper{
+class TopRateStepper: Stepper {
     var steps = PublishRelay<Step>()
     
     var initialStep: Step{
