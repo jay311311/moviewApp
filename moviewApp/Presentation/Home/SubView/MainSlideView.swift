@@ -45,10 +45,10 @@ class MainSlideViewController: UIViewController {
     }()
     lazy var gradientLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
-        gradient.frame =  view.bounds
+        gradient.frame = view.bounds
         gradient.startPoint =  CGPoint(x: 0.5, y: 0.0)
         gradient.endPoint =  CGPoint(x: 0.5, y: 1.0)
-        let colors:[CGColor] = [
+        let colors: [CGColor] = [
             .init(red: 0, green: 0, blue: 0, alpha: 0),
             .init(red: 0, green: 0, blue: 0, alpha: 0.8),
             .init(red: 0, green: 0, blue: 0, alpha: 1)

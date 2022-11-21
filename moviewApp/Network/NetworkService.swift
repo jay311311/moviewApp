@@ -10,8 +10,8 @@ import Moya
 
 enum NetworkService {
     case trendMovie
-    case topRateMovie
-    case topRateTV
+    case upcoming
+    case nowPlaying
     case search(word:String)
 }
 
@@ -24,10 +24,10 @@ extension NetworkService: TargetType {
         switch self {
         case .trendMovie:
             return "trending/movie/week"
-        case .topRateMovie:
-            return "movie/top_rated"
-        case .topRateTV:
-            return "tv/top_rated"
+        case .upcoming:
+            return "movie/upcoming"
+        case .nowPlaying:
+            return "movie/now_playing"
         case .search(let word):
             return "search/multi"
         }

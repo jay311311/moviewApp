@@ -21,24 +21,26 @@ class HomeViewController: UIViewController {
         return mainSlideView
     }()
     lazy var subview: HomeView = {
-        let view  =  HomeView()
+        let view = HomeView()
         return view
     }()
     
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        refreshTrigger.accept(())
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    deinit {
+        print("홈 끝")
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
         bindViewModel()
+        refreshTrigger.accept(())
     }
     
     let mainTitle: UILabel = {

@@ -18,10 +18,6 @@ class MainFlow: Flow {
     
     init() { }
     
-    deinit {
-        print("이것 전역에 있을꺼여서 절때 deinit될수 없도다")
-    }
-    
     func navigate(to step: Step) -> FlowContributors {
         guard let step = step as? MainStep else { return .none }
         switch step {
@@ -35,17 +31,17 @@ class MainFlow: Flow {
     }
     
     private func navigateToLoginScreen() -> FlowContributors {
-        let homeStepper = HomeStepper()
-        let topRateStepper = TopRateStepper()
-        let categoryStepper = CategoryStepper()
+        lazy var homeStepper = HomeStepper()
+        lazy var latestStepper = LatestMovieStepper()
+        lazy var categoryStepper = CategoryStepper()
         
-        let homeFlow = HomeFlow(withStepper: homeStepper)
-        let topRateFlow = TopRateFlow(withStepper: topRateStepper)
-        let categoryFlow = CategoryFlow(withStepper: categoryStepper)
+        lazy var homeFlow = HomeFlow(withStepper: homeStepper)
+        lazy var LatestFlow = LatestMovieFlow(withStepper: latestStepper)
+        lazy var categoryFlow = CategoryFlow(withStepper: categoryStepper)
         
-        Flows.use(homeFlow, topRateFlow, categoryFlow, when: .created) { [unowned self] (root1: UINavigationController, root2: UINavigationController, root3: UINavigationController) in
+        Flows.use(homeFlow, LatestFlow, categoryFlow, when: .created) { [unowned self] (root1: UINavigationController, root2: UINavigationController, root3: UINavigationController) in
             let homeBtn = UITabBarItem(title: "Home", image: UIImage.init(systemName: "house"), selectedImage: nil)
-            let searchBtn = UITabBarItem(title: "Top Rate", image: UIImage.init(systemName: "star"), selectedImage: nil)
+            let searchBtn = UITabBarItem(title: "Latest", image: UIImage.init(systemName: "star"), selectedImage: nil)
             let categoryBtn = UITabBarItem(title: "Category", image: UIImage.init(systemName: "line.horizontal.3"), selectedImage: nil)
             root1.tabBarItem = homeBtn
             root2.tabBarItem = searchBtn
@@ -55,8 +51,8 @@ class MainFlow: Flow {
         
         return .multiple(flowContributors: [.contribute(withNextPresentable: homeFlow,
                                                         withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.home), homeStepper])),
-                                            .contribute(withNextPresentable: topRateFlow,
-                                                        withNextStepper: OneStepper(withSingleStep: topRateStepper.initialStep)),
+                                            .contribute(withNextPresentable: LatestFlow,
+                                                        withNextStepper: OneStepper(withSingleStep: latestStepper.initialStep)),
                                             .contribute(withNextPresentable: categoryFlow, withNextStepper: OneStepper(withSingleStep:categoryStepper.initialStep))
         ])
     }

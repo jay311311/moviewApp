@@ -1,5 +1,5 @@
 //
-//  TopRateViewController.swift
+//  LatestMovieViewController.swift
 //  moviewApp
 //
 //  Created by Jooeun Kim on 2022/10/12.
@@ -10,18 +10,15 @@ import SnapKit
 import RxFlow
 import RxCocoa
 
-class TopRateViewController: UIViewController {
+class LatestMovieViewController: UIViewController {
+    var viewModel: LatestMovieViewModel
+    var refreshTrigger = PublishRelay<Void>()
+    var actionRelay = PublishRelay<LatestMovieActionType>()
     
-    var viewModel: TopRateViewModel
-    let refreshTrigger = PublishRelay<Void>()
-    var actionRelay = PublishRelay<TopRateActionType>()
-    var topRateTV = BehaviorRelay<[TopRateTV]>(value: [])
-    
-    init(viewModel: TopRateViewModel) {
+    init(viewModel: LatestMovieViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        refreshTrigger.accept(())
-
+        
     }
     
     required init?(coder: NSCoder) {
@@ -30,20 +27,21 @@ class TopRateViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         setupNavigationTitle()
         setupLayout()
         bindViewModel()
-        
+        refreshTrigger.accept(())
     }
 
-    lazy var subViews: TopRateView = {
-       let view = TopRateView()
+    lazy var subViews: LatestMovieView = {
+       let view = LatestMovieView()
         return view
     }()
 
     func setupNavigationTitle(){
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.title = "Top Rate"
+        self.navigationItem.title = "Latest"
     }
     func setupLayout() {
         self.view.addSubview(subViews)
@@ -53,9 +51,9 @@ class TopRateViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let result = viewModel.transform(req: TopRateViewModel.Input(refreshTrigger: refreshTrigger.asObservable(), TopRateAcionTrigger: actionRelay.asObservable()))
-        
-        subViews.topRatePalleteView.setupDI(actionRely: actionRelay)
-        subViews.topRatePalleteView.setupDI(dataRelay: result.topRateMovie)
+        let result = viewModel.transform(req: LatestMovieViewModel.Input(refreshTrigger: refreshTrigger.asObservable(), LatestAcionTrigger: actionRelay.asObservable()))
+        subViews.setupDI(actionRely: actionRelay)
+        subViews.setupDI(dataRelay: result.latestResult)
+        print("중간 확인. \(result.latestResult.value)")
     }
 }

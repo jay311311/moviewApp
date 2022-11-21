@@ -1,5 +1,5 @@
 //
-//  TrendAll.swift
+//  TrendMovie.swift
 //  moviewApp
 //
 //  Created by Jooeun Kim on 2022/10/17.
@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct TrendAll: Codable {
+struct TrendMovie: Codable {
     let results: [AllInfo]
     let page: Int
-
 }
 
 struct AllInfo: Codable {

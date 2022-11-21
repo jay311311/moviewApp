@@ -1,5 +1,5 @@
 //
-//  TopRateFlow.swift
+//  LatestMovieFlow.swift
 //  moviewApp
 //
 //  Created by Jooeun Kim on 2022/10/13.
@@ -10,16 +10,16 @@ import UIKit
 import RxFlow
 import RxCocoa
 
-class TopRateFlow: Flow {
+class LatestMovieFlow: Flow {
     
     var root: Presentable {
         return self.rootViewController
     }
     
     private let rootViewController = UINavigationController()
-    private let topRateStepper: TopRateStepper
+    private let topRateStepper: LatestMovieStepper
     
-    init(withStepper steppers: TopRateStepper){
+    init(withStepper steppers: LatestMovieStepper){
         self.topRateStepper =  steppers
     }
     
@@ -34,14 +34,14 @@ class TopRateFlow: Flow {
     }
     
     private func navigateToTopRateScreen() -> FlowContributors {
-        let viewController = TopRateViewController(viewModel: TopRateViewModel())
+        let viewController = LatestMovieViewController(viewModel: LatestMovieViewModel())
         self.rootViewController.pushViewController(viewController, animated: true)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
 }
 
 
-class TopRateStepper: Stepper {
+class LatestMovieStepper: Stepper {
     var steps = PublishRelay<Step>()
     
     var initialStep: Step{

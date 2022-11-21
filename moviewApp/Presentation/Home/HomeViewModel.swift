@@ -20,7 +20,7 @@ class HomeViewModel: Stepper {
     let weeklyMovie = BehaviorRelay<[AllInfo]>(value: [])
     let network = NetworkManager.shared
     
-    init(){  }
+    init(){    }
     
     struct Input {
         let refeshTrigger: Observable<Void>
@@ -32,7 +32,7 @@ class HomeViewModel: Stepper {
     }
     
     func getDatas() {
-        network.getData(path: .trendMovie, TrendAll.self)
+        network.getData(path: .trendMovie, TrendMovie.self)
             .subscribe(onNext: { [weak self] in
                 self?.weeklyMovie.accept($0.results)
             }).disposed(by: dispoaseBag)
