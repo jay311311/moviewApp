@@ -40,6 +40,8 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupLayout()
         bindViewModel()
+    }
+    override func viewWillAppear(_ animated: Bool) {
         refreshTrigger.accept(())
     }
     

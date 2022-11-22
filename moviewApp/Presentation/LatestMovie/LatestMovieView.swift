@@ -25,12 +25,16 @@ class LatestMovieView: UIView {
     }()
     
     lazy var collectionView: UICollectionView = {
-        let collection =  UICollectionView()
-        
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = .zero
+        layout.minimumLineSpacing = 0
+        layout.scrollDirection = .vertical
+        let widthSize = UIScreen.main.bounds.width * 0.78
+        let heightSize = 10.0
+        layout.itemSize =  CGSize(width: widthSize, height: heightSize)
+        let collection =  UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collection
     }()
-    
-
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -45,19 +49,17 @@ class LatestMovieView: UIView {
         switch  segmentControl.selectedSegmentIndex {
         case 0 :
             action.accept(.tapNowPlayingSegment)
-            // 콜렉션뷰 리로드 예정
-
+            collectionView.reloadData()
         case 1 :
             action.accept(.tapUpcomingSegment)
-            // 콜렉션뷰 리로드 예정
-
+            collectionView.reloadData()
         default:
             break
         }
      }
     
     func setupLayout() {
-//        collectionView.register(LatestMovieViewCell, forCellWithReuseIdentifier: <#T##String#>)
+        collectionView.register(LatestMovieViewCell.self, forCellWithReuseIdentifier: "cell")
         addSubviews([segmentControl, collectionView])
         segmentControl.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -71,15 +73,16 @@ class LatestMovieView: UIView {
     }
     
     func bindData(){
-       
+        latestResult.bind(to:collectionView.rx.items(cellIdentifier: "cell", cellType: LatestMovieViewCell.self)){
+            index, data, cell  in
+            cell.title.text = data.title
+        }
     }
     
     func setupDI(actionRely: PublishRelay<LatestMovieActionType>) {
         action.bind(to: actionRely).disposed(by: disposeBag)
     }
     func setupDI(dataRelay: BehaviorRelay<[Movie]>){
-        latestResult.bind(to: dataRelay).disposed(by: disposeBag)
-        print("확인 현장. \(latestResult.value)")
+        dataRelay.bind(to: latestResult).disposed(by: disposeBag)
     }
-
 }

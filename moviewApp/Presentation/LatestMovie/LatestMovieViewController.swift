@@ -18,7 +18,6 @@ class LatestMovieViewController: UIViewController {
     init(viewModel: LatestMovieViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -27,11 +26,13 @@ class LatestMovieViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         setupNavigationTitle()
         setupLayout()
         bindViewModel()
+    }
+    override func viewWillAppear(_ animated: Bool) {
         refreshTrigger.accept(())
+        subViews.collectionView.reloadData()
     }
 
     lazy var subViews: LatestMovieView = {
@@ -54,6 +55,5 @@ class LatestMovieViewController: UIViewController {
         let result = viewModel.transform(req: LatestMovieViewModel.Input(refreshTrigger: refreshTrigger.asObservable(), LatestAcionTrigger: actionRelay.asObservable()))
         subViews.setupDI(actionRely: actionRelay)
         subViews.setupDI(dataRelay: result.latestResult)
-        print("중간 확인. \(result.latestResult.value)")
     }
 }

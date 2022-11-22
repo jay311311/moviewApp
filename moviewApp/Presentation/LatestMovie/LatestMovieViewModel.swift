@@ -23,7 +23,7 @@ class LatestMovieViewModel: Stepper {
     let network = NetworkManager.shared
     let disposeBag = DisposeBag()
     
-    init(){    }
+    init(){  getDatas()  }
     
     struct Input {
         var refreshTrigger: Observable<Void>
@@ -36,7 +36,8 @@ class LatestMovieViewModel: Stepper {
     
     func transform(req : LatestMovieViewModel.Input) -> LatestMovieViewModel.Output {
         req.refreshTrigger.bind{ [weak self] _ in
-            self?.getDatas()
+            guard let self = self else { return }
+            self.latestResult.accept(self.playingResult.value)
         }
         req.LatestAcionTrigger.bind(onNext: doAction).disposed(by: disposeBag)
         return Output(latestResult: latestResult)
@@ -45,8 +46,8 @@ class LatestMovieViewModel: Stepper {
     func getDatas() {
         network.getData(path: .nowPlaying, LatestMovie.self)
             .subscribe(onNext:{ [weak self] in
-                self?.playingResult.accept($0.results)
-                self?.latestResult.accept($0.results)
+                guard let self  = self else { return }
+                self.playingResult.accept($0.results)
             }).disposed(by: disposeBag)
         network.getData(path: .upcoming, LatestMovie.self)
             .subscribe(onNext:{ [weak self] in
@@ -69,13 +70,9 @@ class LatestMovieViewModel: Stepper {
         print("해당 리스트 클릭")
     }
     func tapNowPlaying(){
-        latestResult
-            .accept(playingResult.value)
-        print("현재상영 탭\(latestResult.value)")
-
+        latestResult.accept(playingResult.value)
     }
     func tapUpcoming(){
         latestResult.accept(upcomingResult.value)
-        print("업커밍 탭\(latestResult.value)")
     }
 }
