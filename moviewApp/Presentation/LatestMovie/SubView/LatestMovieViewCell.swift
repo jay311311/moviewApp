@@ -34,6 +34,8 @@ class LatestMovieViewCell: UICollectionViewCell {
     
     lazy var overView: UILabel = {
         let overView = UILabel()
+        overView.numberOfLines = 2
+        overView.lineBreakMode = .byTruncatingTail
         return overView
     }()
     
@@ -65,22 +67,22 @@ class LatestMovieViewCell: UICollectionViewCell {
         container.addSubviews([title,rateAverage,posterImg, overView])
         posterImg.snp.makeConstraints {
             $0.verticalEdges.left.equalToSuperview()
-            $0.width.equalTo(80)
+            $0.left.equalToSuperview()
+            $0.width.equalTo(100)
         }
         title.snp.makeConstraints {
-            $0.left.equalTo(posterImg.snp.right).inset(5)
+            $0.left.equalTo(posterImg.snp.right).offset(5)
             $0.top.equalToSuperview().inset(15)
         }
         overView.snp.makeConstraints {
             $0.left.equalTo(title.snp.left)
             $0.top.equalTo(title.snp.bottom)
+            $0.right.equalToSuperview()
         }
         rateAverage.snp.makeConstraints {
             $0.left.equalTo(title.snp.left)
             $0.top.equalTo(overView.snp.bottom)
         }
-        
-        
     }
 
     

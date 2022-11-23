@@ -7,8 +7,11 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class HomeView: UIView{
+    let vc = UIHostingController(rootView: ListSlider())
+    
     lazy var container: UIView = {
         let view = UIView()
         view.backgroundColor = .blue
@@ -28,6 +31,10 @@ class HomeView: UIView{
     func setupLayout(){
         addSubview(container)
         container.snp.makeConstraints{
+            $0.edges.equalToSuperview()
+        }
+        container.addSubview(vc.view)
+        vc.view.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
     }
