@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxCocoa
 import RxSwift
+import Kingfisher
 
 class LatestMovieView: UIView {
     let latestResult = BehaviorRelay<[Movie]>(value: [])
@@ -30,7 +31,7 @@ class LatestMovieView: UIView {
         layout.minimumLineSpacing = 0
         layout.scrollDirection = .vertical
         let widthSize = UIScreen.main.bounds.width * 0.78
-        let heightSize = 10.0
+        let heightSize = 120.0
         layout.itemSize =  CGSize(width: widthSize, height: heightSize)
         let collection =  UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collection
@@ -75,8 +76,17 @@ class LatestMovieView: UIView {
     func bindData(){
         latestResult.bind(to:collectionView.rx.items(cellIdentifier: "cell", cellType: LatestMovieViewCell.self)){
             index, data, cell  in
-            cell.title.text = data.title
+            if let url = URL(string: "https://image.tmdb.org/t/p/w400\(data.poster_path)") { cell.posterImg.kf.setImage(with: url) }
+            cell.title.text = data.original_title
+            cell.rateAverage.text = String(data.vote_average)
+            cell.overView.text = data.overview
+            cell.movieId = data.id
         }
+            
+        collectionView.rx.modelSelected(Movie.self)
+            .subscribe(onNext: { [weak self] data in
+                self?.action.accept(.goDetail(data.id))
+            })
     }
     
     func setupDI(actionRely: PublishRelay<LatestMovieActionType>) {

@@ -20,8 +20,9 @@ struct MiniMaxTerm: Codable {
 
 struct Movie: Codable {
     var adult: Bool
-    var title: String
+    var original_title: String
     var id: Int
     var vote_average: Double
     var poster_path: String
+    var overview: String
 }

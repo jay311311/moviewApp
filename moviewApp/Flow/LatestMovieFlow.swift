@@ -28,6 +28,8 @@ class LatestMovieFlow: Flow {
         switch step {
         case .topRate:
             return  navigateToTopRateScreen()
+        case .detail(let id):
+            return navigateToDetail(id)
         default:
             return .none
         }
@@ -36,6 +38,12 @@ class LatestMovieFlow: Flow {
     private func navigateToTopRateScreen() -> FlowContributors {
         let viewController = LatestMovieViewController(viewModel: LatestMovieViewModel())
         self.rootViewController.pushViewController(viewController, animated: true)
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
+    }
+    private func navigateToDetail(_ id:Int) -> FlowContributors {
+        let viewController = DetailViewController(viewModel: DetailViewModel(), id:id)
+        viewController.hidesBottomBarWhenPushed = true
+        self.rootViewController.pushViewController(viewController, animated: false)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
 }

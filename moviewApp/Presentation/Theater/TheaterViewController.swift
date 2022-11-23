@@ -21,19 +21,16 @@ class CategoryViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
     }
-    
     
     let mainTitle: UILabel = {
         let label = UILabel()
         label.text = "카테고리"
         return label
     }()
-
     
     func setupUI(){
         self.view.addSubview(mainTitle)
@@ -42,5 +39,4 @@ class CategoryViewController: UIViewController {
             $0.center.equalTo(self.view)
         }
     }
-
 }

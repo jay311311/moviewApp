@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 enum LatestMovieActionType {
-    case goDetail
+    case goDetail(Int)
     case tapNowPlayingSegment
     case tapUpcomingSegment
 }
@@ -37,7 +37,6 @@ class LatestMovieViewModel: Stepper {
     func transform(req : LatestMovieViewModel.Input) -> LatestMovieViewModel.Output {
         req.refreshTrigger.bind{ [weak self] _ in
             guard let self = self else { return }
-            self.latestResult.accept(self.playingResult.value)
         }
         req.LatestAcionTrigger.bind(onNext: doAction).disposed(by: disposeBag)
         return Output(latestResult: latestResult)
@@ -48,6 +47,7 @@ class LatestMovieViewModel: Stepper {
             .subscribe(onNext:{ [weak self] in
                 guard let self  = self else { return }
                 self.playingResult.accept($0.results)
+                self.latestResult.accept(self.playingResult.value)
             }).disposed(by: disposeBag)
         network.getData(path: .upcoming, LatestMovie.self)
             .subscribe(onNext:{ [weak self] in
@@ -57,8 +57,8 @@ class LatestMovieViewModel: Stepper {
     
    private func doAction(_ actionType: LatestMovieActionType) {
         switch actionType {
-        case .goDetail:
-            goDetail()
+        case .goDetail(let id):
+            goDetail(id)
         case .tapNowPlayingSegment:
             tapNowPlaying()
         case .tapUpcomingSegment:
@@ -66,8 +66,9 @@ class LatestMovieViewModel: Stepper {
         }
     }
     
-    func goDetail(){
-        print("해당 리스트 클릭")
+    func goDetail(_ id :Int){
+        print("해당 리스트 클릭 \(id)")
+        steps.accept(MainStep.detail(id: id))
     }
     func tapNowPlaying(){
         latestResult.accept(playingResult.value)

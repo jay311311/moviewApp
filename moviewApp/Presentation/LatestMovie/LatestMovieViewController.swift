@@ -30,10 +30,6 @@ class LatestMovieViewController: UIViewController {
         setupLayout()
         bindViewModel()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        refreshTrigger.accept(())
-        subViews.collectionView.reloadData()
-    }
 
     lazy var subViews: LatestMovieView = {
        let view = LatestMovieView()
