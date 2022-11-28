@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxCocoa
 import RxSwift
+import SwiftUI
 
 class HomeViewController: UIViewController {
     var viewModel: HomeViewModel
@@ -20,11 +21,12 @@ class HomeViewController: UIViewController {
     let mainSlideView = HomeMainSlideViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
         return mainSlideView
     }()
+   
     lazy var subview: HomeView = {
         let view = HomeView()
         return view
     }()
-    
+
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -38,11 +40,14 @@ class HomeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayout()
-        bindViewModel()
+        
+        
     }
     override func viewWillAppear(_ animated: Bool) {
+        
         refreshTrigger.accept(())
+        bindViewModel()
+        setupLayout()
     }
     
     let mainTitle: UILabel = {
@@ -62,7 +67,7 @@ class HomeViewController: UIViewController {
             $0.height.equalTo(200)
         }
         homeMainSlideView.view.snp.makeConstraints {
-            $0.top.directionalHorizontalEdges.equalToSuperview()
+            $0.top.horizontalEdges.equalToSuperview()
             $0.height.equalTo(550)
         }
     }
@@ -71,5 +76,8 @@ class HomeViewController: UIViewController {
         let res = viewModel.transform(req: HomeViewModel.Input(refeshTrigger: refreshTrigger.asObservable(), actionTrigger: actionTrigger.asObservable()))
         homeMainSlideView.setupDI(observable: res.weeklyMovie)
         homeMainSlideView.setupDI(relay: actionTrigger)
+        subview.setupDI(observable: res.weeklyMovie)
+        subview.setupDI(relay: actionTrigger)
+//        subview.vc.rootView.setupDI(relay: actionTrigger)
     }
 }

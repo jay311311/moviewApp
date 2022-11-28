@@ -18,6 +18,7 @@ class HomeViewModel: Stepper {
     let steps = PublishRelay<Step>()
     let dispoaseBag = DisposeBag()
     let weeklyMovie = BehaviorRelay<[AllInfo]>(value: [])
+
     let network = NetworkManager.shared
     
     init(){

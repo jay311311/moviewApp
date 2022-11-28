@@ -1,16 +1,17 @@
 //
-//  LatestMovieViewCell.swift
+//  SubMovieListCell.swift
 //  moviewApp
 //
-//  Created by Jooeun Kim on 2022/11/21.
+//  Created by Jooeun Kim on 2022/11/28.
 //
+
 
 import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
 
-class LatestMovieViewCell: UICollectionViewCell {
+class SubMovieListCell: UICollectionViewCell {
     var posterURL: String?
     var movieId: Int? = nil
     
@@ -24,6 +25,7 @@ class LatestMovieViewCell: UICollectionViewCell {
     
     lazy var title: UILabel = {
         let title = UILabel()
+        title.numberOfLines = 1
         return title
     }()
     
@@ -42,7 +44,7 @@ class LatestMovieViewCell: UICollectionViewCell {
     lazy var posterImg: UIImageView = {
         let imgView = UIImageView()
         imgView.isUserInteractionEnabled = true
-        imgView.contentMode = .scaleAspectFit
+        imgView.contentMode = .scaleAspectFill
         imgView.tag = movieId ?? 0
         return imgView
     }()
@@ -64,25 +66,30 @@ class LatestMovieViewCell: UICollectionViewCell {
             $0.edges.equalToSuperview().inset(10)
         }
         
-        container.addSubviews([title,rateAverage,posterImg, overView])
+        container.addSubviews([rateAverage,posterImg,title])
         posterImg.snp.makeConstraints {
             $0.verticalEdges.left.equalToSuperview()
             $0.left.equalToSuperview()
             $0.width.equalTo(100)
         }
         title.snp.makeConstraints {
-            $0.left.equalTo(posterImg.snp.right).offset(5)
-            $0.top.equalToSuperview().inset(15)
+            $0.left.equalToSuperview().offset(5)
+            $0.right.equalTo(posterImg.snp.right)
+            $0.bottom.equalToSuperview()
         }
-        overView.snp.makeConstraints {
-            $0.left.equalTo(title.snp.left)
-            $0.top.equalTo(title.snp.bottom)
-            $0.right.equalToSuperview()
-        }
+     
         rateAverage.snp.makeConstraints {
-            $0.left.equalTo(title.snp.left)
-            $0.top.equalTo(overView.snp.bottom)
+            $0.right.equalToSuperview()
+            $0.top.equalToSuperview()
         }
     }
 
+    
+//    func bindData(title:String, url: String, rateAverage: Double, overView: String, id: Int) {
+//        self.title.text = title
+//        self.rateAverage.text = String(rateAverage)
+//        self.overView.text = overView
+//        self.posterURL = url
+//        self.posterImg.tag = id
+//    }
 }

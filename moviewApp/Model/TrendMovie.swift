@@ -12,7 +12,7 @@ struct TrendMovie: Codable {
     let page: Int
 }
 
-struct AllInfo: Codable {
+struct AllInfo: Codable,Hashable {
     let adult: Bool
     let backdrop_path: String?
     let id: Int
