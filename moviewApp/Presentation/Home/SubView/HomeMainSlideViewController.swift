@@ -10,8 +10,11 @@ import RxCocoa
 import RxSwift
 
 class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource{
+    
+    
     let weeklyMovieSlide = BehaviorRelay<[AllInfo]>(value: [])
     var slideViewControllerList: [MainSlideViewController] = []
+    var movieList:[AllInfo] = []
     let actionRelay = PublishRelay<HomeActionType>()
 
     let disposeBag = DisposeBag()
@@ -20,13 +23,31 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
         super.viewDidLoad()
         self.dataSource = self
         self.delegate = self
+        
     }
-    func setPageViewList() {
-        for list in weeklyMovieSlide.value {
-            guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview, movieId: list.id) else { return }
-            vc.setupDI(actionRelay: actionRelay)
-            slideViewControllerList.append(vc)
+    
+    func dataBinding(){
+        
+        weeklyMovieSlide.bind(onNext: {
+            self.movieList = $0
+        }).disposed(by: disposeBag)
+        
+        movieList.map { [weak self] list in
+            guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview, movieId: list.id), let self = self else  { return }
+            vc.setupDI(actionRelay: self.actionRelay)
+            self.slideViewControllerList.append(vc)
         }
+        print("여기 \(self.slideViewControllerList.count)")
+//        weeklyMovieSlide
+//            .asObservable()
+//            .subscribe(onNext:{
+//                $0.map {[weak self]  list in
+//                    guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview, movieId: list.id), let self = self else { return }
+//                    vc.setupDI(actionRelay: self.actionRelay)
+//                    self.slideViewControllerList.append(vc)
+//                    print("여기 \(self.slideViewControllerList.count)")
+//                }
+//            }, onCompleted: {print("여기 끝남")}).disposed(by: disposeBag)
     }
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
@@ -36,11 +57,19 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    deinit{
+        print("디이닛 됨")
+    }
     override func viewDidAppear(_ animated: Bool) {
-        setPageViewList()
+        dataBinding()
         if let firstVC = slideViewControllerList.first {
             self.setViewControllers([firstVC], direction: .forward, animated: true)
         }
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        slideViewControllerList = []
+
     }
     
     func setupDI(observable: BehaviorRelay<[AllInfo]>) {
@@ -79,4 +108,3 @@ extension HomeMainSlideViewController {
         return firstViewControllerIndex
     }
 }
-

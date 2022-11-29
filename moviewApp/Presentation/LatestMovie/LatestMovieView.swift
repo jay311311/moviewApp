@@ -85,7 +85,7 @@ class LatestMovieView: UIView {
             
         collectionView.rx.modelSelected(Movie.self)
             .subscribe(onNext: { [weak self] data in
-                self?.action.accept(.goDetail(data.id))
+                self?.action.accept(.tapDetail(data.id))
             })
     }
     

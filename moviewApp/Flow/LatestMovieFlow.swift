@@ -52,7 +52,5 @@ class LatestMovieFlow: Flow {
 class LatestMovieStepper: Stepper {
     var steps = PublishRelay<Step>()
     
-    var initialStep: Step{
-        return MainStep.topRate
-    }
+ 
 }

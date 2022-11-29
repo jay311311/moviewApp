@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 enum LatestMovieActionType {
-    case goDetail(Int)
+    case tapDetail(Int)
     case tapNowPlayingSegment
     case tapUpcomingSegment
 }
@@ -57,7 +57,7 @@ class LatestMovieViewModel: Stepper {
     
    private func doAction(_ actionType: LatestMovieActionType) {
         switch actionType {
-        case .goDetail(let id):
+        case .tapDetail(let id):
             goDetail(id)
         case .tapNowPlayingSegment:
             tapNowPlaying()

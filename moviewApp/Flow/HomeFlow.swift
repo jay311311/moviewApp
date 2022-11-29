@@ -19,8 +19,8 @@ class HomeFlow: Flow {
     private let rootViewController = UINavigationController()
     private let homeStepper: HomeStepper
     
-    init(withStepper steppers: HomeStepper) {
-        self.homeStepper = steppers
+    init(withStepper steppers: HomeStepper){
+        self.homeStepper =  steppers
     }
     
     func navigate(to step: Step) -> FlowContributors {
@@ -37,7 +37,7 @@ class HomeFlow: Flow {
     
     private func navigateToHomeScreen() -> FlowContributors {
         let viewController = HomeViewController(viewModel: HomeViewModel())
-        rootViewController.pushViewController(viewController, animated: false)
+        self.rootViewController.pushViewController(viewController, animated: false)
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
     
@@ -45,11 +45,12 @@ class HomeFlow: Flow {
         let viewController = DetailViewController(viewModel: DetailViewModel(), id:id)
         viewController.hidesBottomBarWhenPushed = true
         self.rootViewController.pushViewController(viewController, animated: false)
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
+        return .none
     }
 }
 
 class HomeStepper: Stepper{
     var steps = PublishRelay<Step>()
-}
+    
 
+}

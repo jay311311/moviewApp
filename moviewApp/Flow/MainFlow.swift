@@ -50,12 +50,14 @@ class MainFlow: Flow {
         }
         
         return .multiple(flowContributors: [.contribute(withNextPresentable: homeFlow,
-                                                        withNextStepper: CompositeStepper(steppers: [OneStepper(withSingleStep: MainStep.home), homeStepper])),
+                                                        withNextStepper: OneStepper(withSingleStep: MainStep.home)),
                                             .contribute(withNextPresentable: LatestFlow,
-                                                        withNextStepper: OneStepper(withSingleStep: latestStepper.initialStep)),
-                                            .contribute(withNextPresentable: categoryFlow, withNextStepper: OneStepper(withSingleStep:categoryStepper.initialStep))
+                                                        withNextStepper: OneStepper(withSingleStep: MainStep.topRate)),
+                                            .contribute(withNextPresentable: categoryFlow,
+                                                        withNextStepper: OneStepper(withSingleStep:MainStep.category))
         ])
     }
+    
     private func navigateToLogoutScreen() -> FlowContributors {
         return .none
     }

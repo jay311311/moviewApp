@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 enum HomeActionType {
-    case goDetail(id: Int)
+    case tapDetail(id: Int)
 }
 
 class HomeViewModel: Stepper {
@@ -47,11 +47,7 @@ class HomeViewModel: Stepper {
     }
     
     func transform(req: HomeViewModel.Input) -> HomeViewModel.Output {
-        req.refeshTrigger.bind { [weak self] _ in
-            guard let self = self else { return }
-            self.getDatas()
-        }
-        //액션 트리거 연동
+  
         req.actionTrigger.bind(onNext: doAction).disposed(by: dispoaseBag)
         
         return Output(weeklyMovie: weeklyMovie )
@@ -59,12 +55,12 @@ class HomeViewModel: Stepper {
     
     private func doAction(_ actionType: HomeActionType) {
         switch actionType {
-        case .goDetail(let id):
-            goDetail(id)
+        case .tapDetail(let id):
+            return   self.steps.accept(MainStep.detail(id: id))
         }
     }
     
-    func goDetail(_ id: Int){
-        steps.accept(MainStep.detail(id: id))
-    }
+//    func goDetailScreen(_ id: Int){
+//      return
+//    }
 }

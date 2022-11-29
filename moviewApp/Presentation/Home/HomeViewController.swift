@@ -40,14 +40,12 @@ class HomeViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bindViewModel()
+        setupLayout()
         
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        refreshTrigger.accept(())
-        bindViewModel()
-        setupLayout()
     }
     
     let mainTitle: UILabel = {

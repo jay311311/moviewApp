@@ -23,7 +23,7 @@ class CategoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupLayout()
     }
     
     let mainTitle: UILabel = {
@@ -32,11 +32,13 @@ class CategoryViewController: UIViewController {
         return label
     }()
     
-    func setupUI(){
+    func setupLayout(){
         self.view.addSubview(mainTitle)
         
         mainTitle.snp.makeConstraints{
             $0.center.equalTo(self.view)
         }
     }
+    
+
 }
