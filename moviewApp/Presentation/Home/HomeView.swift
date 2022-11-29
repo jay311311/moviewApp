@@ -58,6 +58,10 @@ class HomeView: UIView{
             cell.overView.text = data.overview
             cell.movieId = data.id
         }
+        collectionView.rx.modelSelected(AllInfo.self)
+            .subscribe(onNext: {
+                self.actionRelay.accept(.tapDetail(id: $0.id))
+            })
     }
     
     func setupDI(observable: BehaviorRelay<[AllInfo]>) {

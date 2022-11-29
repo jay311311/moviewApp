@@ -16,7 +16,6 @@ class MainSlideViewController: UIViewController {
     var posterURL: String = ""
     var overview: String = ""
     var movieId: Int? = nil
-    /// action relay
    
     let action = PublishRelay<HomeActionType>()
     let dispoaseBag = DisposeBag()
@@ -27,6 +26,7 @@ class MainSlideViewController: UIViewController {
         label.textColor = .white
         return label
     }()
+    
     lazy var overviewLabel: UILabel = {
         let label = UILabel()
         label.text = overview
@@ -34,14 +34,18 @@ class MainSlideViewController: UIViewController {
         label.numberOfLines = 1
         return label
     }()
+    
     lazy var posterImg: UIImageView = {
         let imgView = UIImageView()
         imgView.isUserInteractionEnabled = true
+        imgView.tag = movieId!
         if let url = URL(string: "https://image.tmdb.org/t/p/w400\(posterURL)") { imgView.kf.setImage(with: url) }
         imgView.contentMode = .scaleAspectFit
-        imgView.tag = movieId!
+        let tapGesture =  UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
+        imgView.addGestureRecognizer(tapGesture)
         return imgView
     }()
+    
     lazy var gradientLayer: CAGradientLayer = {
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
@@ -63,8 +67,6 @@ class MainSlideViewController: UIViewController {
         self.movieId =  movieId
         super.init(nibName: nil, bundle: nil)
         setupLayout()
-        let tapGesture =  UITapGestureRecognizer(target: self, action: #selector(didTapView(_:)))
-        self.view.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
@@ -72,7 +74,6 @@ class MainSlideViewController: UIViewController {
     }
     
     @objc func didTapView(_ sender: UITapGestureRecognizer) {
-        print("몇번 찍히나")
         guard let imageTag = sender.view?.tag else { return }
         self.action.accept(.tapDetail(id: imageTag))
     }

@@ -49,7 +49,6 @@ class SubMovieListCell: UICollectionViewCell {
         return imgView
     }()
     
-    
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setupLayout()
@@ -83,13 +82,4 @@ class SubMovieListCell: UICollectionViewCell {
             $0.top.equalToSuperview()
         }
     }
-
-    
-//    func bindData(title:String, url: String, rateAverage: Double, overView: String, id: Int) {
-//        self.title.text = title
-//        self.rateAverage.text = String(rateAverage)
-//        self.overView.text = overView
-//        self.posterURL = url
-//        self.posterImg.tag = id
-//    }
 }

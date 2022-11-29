@@ -12,7 +12,7 @@ import RxSwift
 import SwiftUI
 
 class HomeViewController: UIViewController {
-    var viewModel: HomeViewModel
+    var viewModel: HomeViewModel = HomeViewModel()
     var disposeBag = DisposeBag()
     let refreshTrigger = PublishRelay<Void>()
     let actionTrigger = PublishRelay<HomeActionType>()
@@ -42,10 +42,6 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         bindViewModel()
         setupLayout()
-        
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        
     }
     
     let mainTitle: UILabel = {
@@ -76,6 +72,5 @@ class HomeViewController: UIViewController {
         homeMainSlideView.setupDI(relay: actionTrigger)
         subview.setupDI(observable: res.weeklyMovie)
         subview.setupDI(relay: actionTrigger)
-//        subview.vc.rootView.setupDI(relay: actionTrigger)
     }
 }

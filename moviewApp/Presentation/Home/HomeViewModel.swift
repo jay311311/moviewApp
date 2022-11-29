@@ -59,8 +59,4 @@ class HomeViewModel: Stepper {
             return   self.steps.accept(MainStep.detail(id: id))
         }
     }
-    
-//    func goDetailScreen(_ id: Int){
-//      return
-//    }
 }
