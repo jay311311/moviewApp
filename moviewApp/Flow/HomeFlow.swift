@@ -10,6 +10,7 @@ import UIKit
 import RxFlow
 import RxSwift
 import RxCocoa
+import SwiftUI
 
 class HomeFlow: Flow {
     var root: Presentable {
@@ -42,14 +43,17 @@ class HomeFlow: Flow {
     }
     
     private func navigateToDetail(_ id:Int) -> FlowContributors {
-        let viewController = DetailViewController(viewModel: DetailViewModel(), id:id)
-        viewController.hidesBottomBarWhenPushed = true
-        self.rootViewController.pushViewController(viewController, animated: false)
+//        let viewController = DetailViewController(viewModel: DetailViewModel(), id:id)
+//        viewController.hidesBottomBarWhenPushed = true
+//        self.rootViewController.pushViewController(viewController, animated: false)
+        let viewController =  UIHostingController(rootView: detailViewUI().environmentObject(DetailViewModel(id:id)))
+                viewController.hidesBottomBarWhenPushed = true
+                self.rootViewController.pushViewController(viewController, animated: false)
         return .none
     }
 }
 
-class HomeStepper: Stepper{
+class HomeStepper: RxFlow.Stepper{
     var steps = PublishRelay<Step>()
     
 

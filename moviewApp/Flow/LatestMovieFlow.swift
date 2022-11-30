@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import RxFlow
 import RxCocoa
+import SwiftUI
 
 class LatestMovieFlow: Flow {
     
@@ -41,15 +42,15 @@ class LatestMovieFlow: Flow {
         return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
     }
     private func navigateToDetail(_ id:Int) -> FlowContributors {
-        let viewController = DetailViewController(viewModel: DetailViewModel(), id:id)
-        viewController.hidesBottomBarWhenPushed = true
-        self.rootViewController.pushViewController(viewController, animated: false)
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
+        let viewController =  UIHostingController(rootView: detailViewUI().environmentObject(DetailViewModel(id:id)))
+                viewController.hidesBottomBarWhenPushed = true
+                self.rootViewController.pushViewController(viewController, animated: false)
+        return .none
     }
 }
 
 
-class LatestMovieStepper: Stepper {
+class LatestMovieStepper: RxFlow.Stepper {
     var steps = PublishRelay<Step>()
     
  

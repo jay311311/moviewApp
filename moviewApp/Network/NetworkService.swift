@@ -12,7 +12,8 @@ enum NetworkService {
     case trendMovie
     case upcoming
     case nowPlaying
-    case search(word:String)
+    case search(word: String)
+    case detail(id: Int)
 }
 
 extension NetworkService: TargetType {
@@ -29,7 +30,9 @@ extension NetworkService: TargetType {
         case .nowPlaying:
             return "movie/now_playing"
         case .search(let word):
-            return "search/multi"
+            return "search/movie"
+        case .detail(let id):
+            return "movie/\(id)"
         }
     }
     

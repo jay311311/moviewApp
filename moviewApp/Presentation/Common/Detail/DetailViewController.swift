@@ -9,7 +9,7 @@ import UIKit
 import RxFlow
 import RxSwift
 import RxCocoa
-
+import SwiftUI
 
 class DetailViewController: UIViewController {
 
@@ -47,6 +47,4 @@ class DetailViewController: UIViewController {
     }
 }
 
-class DetailViewModel: Stepper {
-    var steps = PublishRelay<Step>()
-}
+

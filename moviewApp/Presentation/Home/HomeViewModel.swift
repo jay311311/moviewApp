@@ -18,16 +18,9 @@ class HomeViewModel: Stepper {
     let steps = PublishRelay<Step>()
     let dispoaseBag = DisposeBag()
     let weeklyMovie = BehaviorRelay<[AllInfo]>(value: [])
-
     let network = NetworkManager.shared
     
-    init(){
-        network.getData(path: .trendMovie, TrendMovie.self)
-            .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                self.weeklyMovie.accept($0.results)
-            }).disposed(by: dispoaseBag)
-    }
+    init(){ getDatas() }
     
     struct Input {
         let refeshTrigger: Observable<Void>
