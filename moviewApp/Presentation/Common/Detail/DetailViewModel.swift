@@ -16,24 +16,23 @@ class DetailViewModel: RxFlow.Stepper, ObservableObject  {
     var id: Int
     let network =  NetworkManager.shared
     let disposeBag = DisposeBag()
-    @Published var title = "testestest"
-    @Published var movieInfomation: [DetailMovie] = []
+    @Published var movieInfomation: DetailMovie? = nil
 
     
     init( id: Int) {
         self.id = id
-        title = String(id)
         getData(id)
     }
     
     func getData(_ id:Int ){
         network.getData(path: .detail(id: id), DetailMovie.self)
-            .subscribe(onNext: { [weak self] in
+            .subscribe(onNext: { [weak self]  in
                 guard let self = self else { return }
-                print("여기 프린트로 \($0)")
-                self.movieInfomation.append($0)
+                self.movieInfomation = DetailMovie(id: $0.id, title: $0.title, vote_average: $0.vote_average, runtime: $0.runtime, release_date: $0.release_date, tagline: $0.tagline, status: $0.status, overview: $0.overview, homepage: $0.homepage, imdb_id: $0.imdb_id, poster_path: $0.poster_path)
             }).disposed(by: disposeBag)
     }
+    
+    
     
 
     

@@ -18,4 +18,5 @@ struct DetailMovie: Codable {
     var overview: String
     var homepage: String
     var imdb_id: String
+    var poster_path: String
 }
