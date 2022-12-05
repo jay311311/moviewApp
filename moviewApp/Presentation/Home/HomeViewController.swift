@@ -12,7 +12,7 @@ import RxSwift
 import SwiftUI
 
 class HomeViewController: UIViewController {
-    var viewModel: HomeViewModel = HomeViewModel()
+    var viewModel: HomeViewModel
     var disposeBag = DisposeBag()
     let refreshTrigger = PublishRelay<Void>()
     let actionTrigger = PublishRelay<HomeActionType>()

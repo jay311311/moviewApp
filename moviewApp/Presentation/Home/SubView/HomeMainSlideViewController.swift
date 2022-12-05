@@ -12,27 +12,29 @@ import RxSwift
 class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     let weeklyMovieSlide = BehaviorRelay<[AllInfo]>(value: [])
     var slideViewControllerList: [MainSlideViewController] = []
-    var movieList:[AllInfo] = []
     let actionRelay = PublishRelay<HomeActionType>()
-
+    
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
         self.delegate = self
+        dataBinding()
     }
     
     func dataBinding(){
         weeklyMovieSlide.bind(onNext: {
-            self.movieList = $0
+            $0.map { [weak self] list in
+                guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview, movieId: list.id), let self = self else  { return }
+                vc.setupDI(actionRelay: self.actionRelay)
+                self.slideViewControllerList.append(vc)
+            }
+            if let firstVC = self.slideViewControllerList.first {
+                self.setViewControllers([firstVC], direction: .forward, animated: true)
+            }
         }).disposed(by: disposeBag)
         
-        movieList.map { [weak self] list in
-            guard let vc = MainSlideViewController(movieTitle: list.title, posterURL: list.poster_path, overview:list.overview, movieId: list.id), let self = self else  { return }
-            vc.setupDI(actionRelay: self.actionRelay)
-            self.slideViewControllerList.append(vc)
-        }
     }
     
     override init(transitionStyle style: UIPageViewController.TransitionStyle, navigationOrientation: UIPageViewController.NavigationOrientation, options: [UIPageViewController.OptionsKey: Any]? = nil) {
@@ -46,16 +48,7 @@ class HomeMainSlideViewController: UIPageViewController, UIPageViewControllerDel
     deinit{
         print("디이닛 됨")
     }
-    override func viewDidAppear(_ animated: Bool) {
-        dataBinding()
-        if let firstVC = slideViewControllerList.first {
-            self.setViewControllers([firstVC], direction: .forward, animated: true)
-        }
-    }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        slideViewControllerList = []
-    }
     
     func setupDI(observable: BehaviorRelay<[AllInfo]>) {
         observable.bind(to: weeklyMovieSlide).disposed(by: disposeBag)

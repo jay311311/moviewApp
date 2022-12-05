@@ -13,7 +13,6 @@ struct detailViewUI: View {
     @State var scrollOffset: CGFloat = CGFloat.zero
 
     var body: some View {
-        let what  = print(self.detailViewModel.movieInfomation)
         if let movie = detailViewModel.movieInfomation, let url = URL(string: "https://image.tmdb.org/t/p/w400\(movie.poster_path)") {
             ScrollView{
                 VStack(alignment:.leading){
