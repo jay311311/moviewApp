@@ -33,16 +33,18 @@ class MainFlow: Flow {
     private func navigateToLoginScreen() -> FlowContributors {
         lazy var homeStepper = HomeStepper()
         lazy var latestStepper = LatestMovieStepper()
-        lazy var categoryStepper = CategoryStepper()
+        lazy var searchStepper = SearchStepper()
         
         lazy var homeFlow = HomeFlow(withStepper: homeStepper)
-        lazy var LatestFlow = LatestMovieFlow(withStepper: latestStepper)
-        lazy var categoryFlow = CategoryFlow(withStepper: categoryStepper)
+        lazy var latestFlow = LatestMovieFlow(withStepper: latestStepper)
+        lazy var searchFlow = SearchFlow(withStepper: searchStepper)
+
         
-        Flows.use(homeFlow, LatestFlow, categoryFlow, when: .created) { [unowned self] (root1: UINavigationController, root2: UINavigationController, root3: UINavigationController) in
+        
+        Flows.use(homeFlow, latestFlow, searchFlow, when: .created) { [unowned self] (root1: UINavigationController, root2: UINavigationController, root3: UINavigationController) in
             let homeBtn = UITabBarItem(title: "Home", image: UIImage.init(systemName: "house"), selectedImage: nil)
             let searchBtn = UITabBarItem(title: "Latest", image: UIImage.init(systemName: "star"), selectedImage: nil)
-            let categoryBtn = UITabBarItem(title: "Category", image: UIImage.init(systemName: "line.horizontal.3"), selectedImage: nil)
+            let categoryBtn = UITabBarItem(title: "Search", image: UIImage.init(systemName: "magnifyingglass"), selectedImage: nil)
             root1.tabBarItem = homeBtn
             root2.tabBarItem = searchBtn
             root3.tabBarItem = categoryBtn
@@ -51,10 +53,10 @@ class MainFlow: Flow {
         
         return .multiple(flowContributors: [.contribute(withNextPresentable: homeFlow,
                                                         withNextStepper: OneStepper(withSingleStep: MainStep.home)),
-                                            .contribute(withNextPresentable: LatestFlow,
+                                            .contribute(withNextPresentable: latestFlow,
                                                         withNextStepper: OneStepper(withSingleStep: MainStep.topRate)),
-                                            .contribute(withNextPresentable: categoryFlow,
-                                                        withNextStepper: OneStepper(withSingleStep:MainStep.category))
+                                            .contribute(withNextPresentable: searchFlow,
+                                                        withNextStepper: OneStepper(withSingleStep:MainStep.search))
         ])
     }
     

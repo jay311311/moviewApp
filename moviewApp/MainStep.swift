@@ -15,7 +15,7 @@ enum MainStep: Step{
     
     case home
     case topRate
-    case category
+    case search
     case detail(id: Int)
 }
 

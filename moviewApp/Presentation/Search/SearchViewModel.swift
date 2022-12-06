@@ -1,5 +1,5 @@
 //
-//  CategoryViewModel.swift
+//  SearchViewModel.swift
 //  moviewApp
 //
 //  Created by Jooeun Kim on 2022/10/13.
@@ -9,7 +9,7 @@ import RxFlow
 import RxSwift
 import RxCocoa
 
-class CategoryViewModel: Stepper  {
+class SearchViewModel: Stepper  {
     let steps = PublishRelay<Step>()
 }
 
