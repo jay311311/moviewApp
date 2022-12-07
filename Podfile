@@ -12,7 +12,7 @@ target 'moviewApp' do
     pod 'ReactorKit'
     pod 'Kingfisher', '~> 7.0'
     pod 'Action'
-
+    pod 'ReactorKit'
   # Pods for moviewApp
 
   target 'moviewAppTests' do

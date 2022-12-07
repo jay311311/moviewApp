@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Search"
         self.navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.reactor
     }
     
     let mainTitle: UILabel = {
