@@ -9,21 +9,22 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
-
+import ReactorKit
 
 class SearchViewController: UIViewController {
 
-    var viewModel: SearchViewModel
-    
+    var disposeBag = DisposeBag()
+
     init(viewModel: SearchViewModel) {
-        self.viewModel = viewModel
+        defer{ self.reactor = viewModel}
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    let searchController = SearchBarController(searchResultsController: nil)
+    lazy var searchBar = SearchBarController(searchResultsController: nil)
+    lazy var searchView = SearchView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +32,10 @@ class SearchViewController: UIViewController {
         setupNavigation()
     }
     func setupNavigation(){
-        self.navigationItem.searchController = searchController
+        self.navigationItem.searchController = searchBar
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Search"
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.reactor
     }
     
     let mainTitle: UILabel = {
@@ -45,10 +45,10 @@ class SearchViewController: UIViewController {
     }()
     
     func setupLayout(){
-        self.view.addSubview(mainTitle)
+        self.view.addSubview(searchView)
         
-        mainTitle.snp.makeConstraints{
-            $0.center.equalTo(self.view)
+        searchView.snp.makeConstraints{
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -56,4 +56,10 @@ class SearchViewController: UIViewController {
 }
 
 
+extension SearchViewController: View {
+    func bind(reactor: SearchViewModel) {
+        searchView.bind(reactor: reactor)
+        searchBar.bind(reactor: reactor)
+    }
+}
 

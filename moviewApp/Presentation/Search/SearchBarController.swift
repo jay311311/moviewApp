@@ -10,14 +10,14 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class SearchBarController: UISearchController, UISearchBarDelegate, View {
+class SearchBarController: UISearchController, UISearchBarDelegate{
     var disposeBag =  DisposeBag()
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        self.reactor = SearchViewModel()
+//        self.reactor = SearchViewModel()
     }
     
     
@@ -29,24 +29,22 @@ class SearchBarController: UISearchController, UISearchBarDelegate, View {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func bind(reactor: SearchViewModel) {
-        searchBar.rx.text
-            .distinctUntilChanged()
-            .map{ Reactor.Action.tapReturn($0) }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-        searchBar.rx.cancelButtonClicked
-            .map { Reactor.Action.tapCancel}
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-        
-        reactor.state.map{  $0.text }
-            .subscribe(onNext:{
-                self.searchBar.text = $0
-            })
+    func bind(reactor :SearchViewModel) {
+        bindAction(reactor: reactor)
+        bindState(reactor: reactor)
     }
     
+    func bindAction(reactor: SearchViewModel) {
+        searchBar.rx.text
+            .distinctUntilChanged()
+            .map{ SearchViewModel.Action.tapReturn($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+    
+    func bindState(reactor: SearchViewModel) {
+        return
+    }
    
     
     /*

@@ -32,9 +32,10 @@ class SearchFlow: Flow {
     }
     
     func navigateToSearchScreen() -> FlowContributors {
-        let viewController = SearchViewController(viewModel: SearchViewModel())
+        let viewModel = SearchViewModel()
+        let viewController = SearchViewController(viewModel: viewModel)
         self.rooViewController.pushViewController(viewController, animated: true)
-        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewController.viewModel))
+        return .one(flowContributor: .contribute(withNextPresentable: viewController, withNextStepper: viewModel))
     }
 }
 
