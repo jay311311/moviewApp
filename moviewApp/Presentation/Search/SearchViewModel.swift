@@ -10,15 +10,24 @@ import RxSwift
 import RxCocoa
 import ReactorKit
 
-class SearchViewModel: Stepper, Reactor  {
+class SearchViewModel: Stepper, Reactor {
+    
+    let steps = PublishRelay<Step>()
+    let network = NetworkManager.shared
+    let resultMovie = BehaviorRelay<[ResultMovie]>(value: [])
+    
     let initialState: State = State()
+    
+    init(){ }
     
     enum Action {
         case tapReturn(String?)
+        case tapCancel
     }
     
     enum Mutation{
         case endTexting([ResultMovie])
+        case deleteAllText
     }
     
     struct State {
@@ -28,11 +37,15 @@ class SearchViewModel: Stepper, Reactor  {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .tapReturn(let word):
+            if let word  = word, word == "" {
+                return Observable.just(.deleteAllText)
+            }
             guard let word = word else { return Disposables.create() as! Observable<SearchViewModel.Mutation>}
-//            let what  = network.getData(path: .search(word: word), SearchMovie.self)
-            return  network.getData(path: .search(word: word), SearchMovie.self).flatMap { result in
+            return network.getData(path: .search(word: word), SearchMovie.self).flatMap { result in
                 return Observable.just(.endTexting(result.results))
             }
+        case .tapCancel:
+            return Observable.just(.deleteAllText)
         }
     }
     
@@ -42,24 +55,14 @@ class SearchViewModel: Stepper, Reactor  {
             var newState = state
             newState.moviewList = result
             return newState
+        case .deleteAllText :
+            var newState = state
+            newState.moviewList = []
+            return newState
         }
     }
-   
-    
-    let steps = PublishRelay<Step>()
-    let network = NetworkManager.shared
-    let resultMovie = BehaviorRelay<[ResultMovie]>(value: [])
-    
-    init(){ }
-    
-    //1. 검색결과 없을시 안내문구 생성
-    //2. reatorkit을 통한 검색결과 데이터 바인딩
-//    func getData(_ word: String?) -> Observable<[ResultMovie]>  {
-//        guard let word =  word else { return }
-//       let result =
-//
-//    }
 }
+
 
 
 

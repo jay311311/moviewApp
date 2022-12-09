@@ -49,7 +49,6 @@
 		67E67EA328F8127900DC3FC8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E67EA228F8127900DC3FC8 /* HomeViewModel.swift */; };
 		67E67EA628F8143F00DC3FC8 /* LatestMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E67EA528F8143F00DC3FC8 /* LatestMovieViewModel.swift */; };
 		67E67EA928F8147900DC3FC8 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E67EA828F8147900DC3FC8 /* SearchViewModel.swift */; };
-		67FCF688292DF6DE002A2BF1 /* ListSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67FCF687292DF6DE002A2BF1 /* ListSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,7 +117,6 @@
 		67E67EA228F8127900DC3FC8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		67E67EA528F8143F00DC3FC8 /* LatestMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestMovieViewModel.swift; sourceTree = "<group>"; };
 		67E67EA828F8147900DC3FC8 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
-		67FCF687292DF6DE002A2BF1 /* ListSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSlider.swift; sourceTree = "<group>"; };
 		6F48FEEA9F13C7B9BF89A56A /* Pods-moviewAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-moviewAppTests.debug.xcconfig"; path = "Target Support Files/Pods-moviewAppTests/Pods-moviewAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		980B538EF102AE91B6B5F287 /* libPods-moviewApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-moviewApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD03F8AC83697686BB1F1EC3 /* libPods-moviewApp-moviewAppUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-moviewApp-moviewAppUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,7 +184,6 @@
 				67479746290A48FD00B4FDA3 /* HomeMainSlideViewController.swift */,
 				6740D0B4290FAE7F001BE993 /* MainSlideView.swift */,
 				67A83AA02934B04B00B107DB /* SubMovieListCell.swift */,
-				67FCF687292DF6DE002A2BF1 /* ListSlider.swift */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -584,7 +581,6 @@
 				6758866A28F65BBB00AD8D4E /* ViewController.swift in Sources */,
 				67A83AA12934B04B00B107DB /* SubMovieListCell.swift in Sources */,
 				67283BE7291358E1005DC535 /* LatestMovie.swift in Sources */,
-				67FCF688292DF6DE002A2BF1 /* ListSlider.swift in Sources */,
 				67E67E9428F800E800DC3FC8 /* MainFlow.swift in Sources */,
 				67283BE92913A8D7005DC535 /* LatestMovieView.swift in Sources */,
 				67258F96292B76BD00B7672C /* LatestMovieViewCell.swift in Sources */,

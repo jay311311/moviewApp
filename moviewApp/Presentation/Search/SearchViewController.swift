@@ -16,7 +16,7 @@ class SearchViewController: UIViewController {
     var disposeBag = DisposeBag()
 
     init(viewModel: SearchViewModel) {
-        defer{ self.reactor = viewModel}
+        defer{ self.reactor = viewModel }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,21 +38,11 @@ class SearchViewController: UIViewController {
         self.navigationItem.hidesSearchBarWhenScrolling = false
     }
     
-    let mainTitle: UILabel = {
-        let label = UILabel()
-        label.text = "검색"
-        return label
-    }()
-    
     func setupLayout(){
         self.view.addSubview(searchView)
         
-        searchView.snp.makeConstraints{
-            $0.edges.equalToSuperview()
-        }
+        searchView.snp.makeConstraints{ $0.edges.equalToSuperview() }
     }
-    
-
 }
 
 

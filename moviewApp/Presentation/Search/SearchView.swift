@@ -13,9 +13,9 @@ import ReactorKit
 
 class SearchView: UIView {
 
+    let disposeBag = DisposeBag()
     lazy var tableView: UITableView = {
       let table  = UITableView()
-        
         return table
     }()
     
@@ -44,16 +44,14 @@ extension SearchView {
         bindState(reator: reactor)
     }
     
-    
     func bindAction(reator: SearchViewModel){
         return
     }
     
     func bindState(reator: SearchViewModel){
-//        reator.state.map { $0.moviewList }
-//            .bind(to: tableView.rx.items(cellIdentifier: SearchTableViewCell.identifier, cellType: SearchTableViewCell.self)){ index, item, cell in
-//
-//
-//            })
+        reator.state.compactMap { $0.moviewList }
+            .bind(to: tableView.rx.items(cellIdentifier: SearchTableViewCell.identifier, cellType: SearchTableViewCell.self)) { index, item, cell in
+                cell.setupCell(item: item)
+            }.disposed(by: disposeBag)
     }
 }

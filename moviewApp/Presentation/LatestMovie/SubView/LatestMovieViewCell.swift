@@ -84,5 +84,4 @@ class LatestMovieViewCell: UICollectionViewCell {
             $0.top.equalTo(overView.snp.bottom)
         }
     }
-
 }
